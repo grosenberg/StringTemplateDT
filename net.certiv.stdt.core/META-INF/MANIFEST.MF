@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ST Core
+Bundle-SymbolicName: net.certiv.stdt.core;singleton:=true
+Bundle-Version: 4.3.1.qualifier
+Bundle-ClassPath: .
+Eclipse-RegisterBuddy: net.certiv.dsl.lib
+Bundle-Activator: net.certiv.stdt.core.STCore
+Bundle-Vendor: Certiv Analytics
+Export-Package: net.certiv.stdt.core,
+ net.certiv.stdt.core.builder,
+ net.certiv.stdt.core.parser,
+ net.certiv.stdt.core.parser.gen,
+ net.certiv.stdt.core.preferences
+Require-Bundle: net.certiv.dsl.core;bundle-version="0.5.6",
+ net.certiv.dsl.ui;bundle-version="0.5.6",
+ net.certiv.dsl.lib;bundle-version="0.5.6",
+ org.eclipse.core.resources;bundle-version="3.9.1",
+ org.eclipse.core.runtime;bundle-version="3.10.0",
+ org.eclipse.ui;bundle-version="3.106.0",
+ org.eclipse.text;bundle-version="3.5.300"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Import-Package: net.certiv.stdt.core.parser,
+ org.apache.commons.io;version="2.2.0"

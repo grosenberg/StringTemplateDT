@@ -1,0 +1,80 @@
+/**
+ * Sample StringTemplate for demonstrating
+ * context dependent syntax coloring  <Javadoc>
+ */
+group PrefsColorSample;
+
+assign(name, value) ::= <<assign("<name>", <value>);>>
+/*
+ * <Multi-line comment>
+ */
+combine(into, lhs, op, rhs) ::= <<
+<! Embedded template comment !>
+combine("<into>", "<lhs>", "<op>", "<rhs>");
+>>
+
+define(name, variable, polynomial) ::= <<
+
+// Defining the function <name>.
+<polynomial>
+define("<name>", "<variable>", p);
+>>
+
+derivative(name) ::= <<getFunction("<name>").getDerivative()>>
+
+function(name) ::= <<getFunction("<name>")>>
+
+functionEvalForValue(name, value) ::= <<functionEval("<name>", <value>)>>
+
+functionEvalForVariable(name, var) ::=
+<<functionEval("<name>", getVariable("<var>"))>>
+
+help() ::= "help();"
+
+listFunctions() ::= <<
+
+listFunctions();
+>>
+
+listVariables() ::= <<
+
+listVariables();
+>>
+
+number(text) ::= "<text>"
+
+polynomial(terms) ::= <<
+p = new Polynomial();
+<terms; separator="\n">
+>>
+
+print(targets) ::= <<
+
+System.out.println(
+    <targets; separator=" +\n">);
+>>
+
+script(statements) ::= <<
+import com.ociweb.math.*;
+
+public class MathScript extends MathScriptBase {
+
+    public static void main(String[] args) {
+        new MathScript();
+    }
+
+    private MathScript() {
+        Polynomial p;
+
+        <statements; separator="\n">
+    }
+}
+>>
+
+term(coef, var, exp) ::= <<
+p.addTerm(<coef><if(var)>, "<var>"<endif><if(exp)>, <exp><endif>);
+>>
+
+text(value) ::= "<value>"
+
+variable(name) ::= <<getVariable("<name>")>>
