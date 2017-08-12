@@ -1,7 +1,7 @@
 package net.certiv.stdt.core.parser;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -35,10 +35,10 @@ public class STSourceFormatter extends DslCodeFormatter {
 	}
 
 	@Override
-	public ParseTree parse(String name, char[] content, DslParseErrorListener errListener) throws RecognitionException {
+	public ParseTree parse(String name, String content, DslParseErrorListener errListener) throws RecognitionException {
 		Log.debug(this, "Parse [name=" + name + "]");
 
-		CharStream input = new ANTLRInputStream(content, content.length);
+		CharStream input = CharStreams.fromString(content);
 		STGLexer lexer = new STGLexer(input);
 
 		// lexer.setLexerHelper(new LexerHelper());

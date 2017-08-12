@@ -8,7 +8,8 @@
 	
 	<groupId>net.certiv</groupId>
 	<artifactId>net.certiv.stdt</artifactId>
-	<version>4.3.1-SNAPSHOT</version>
+	<version>4.7.0-SNAPSHOT</version>
+	
 	<name>net.certiv.stdt :: parent</name>
 	<description>net.certiv.stdt parent</description>
 
@@ -19,17 +20,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<tycho.version>0.24.0</tycho.version>
-		<tycho.extras.version>0.24.0</tycho.extras.version>
-		<tycho.test.platformArgs />
-		<tycho.test.jvmArgs>-Xmx512m</tycho.test.jvmArgs>
+		<tycho.version>1.0.0</tycho.version>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>neon</id>
+			<id>eclipse-oxygen</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/neon</url>
+			<url>http://download.eclipse.org/releases/oxygen</url>
 		</repository>
 		<repository>
 			<id>dsl</id>

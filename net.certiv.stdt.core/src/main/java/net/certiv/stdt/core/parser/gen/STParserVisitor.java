@@ -1,4 +1,4 @@
-// Generated from D:/DevFiles/Eclipse/Dsl/stdt/net.certiv.stdt.core/src/main/java/net/certiv/stdt/core/parser/STParser.g4 by ANTLR 4.5.3
+// Generated from D:/DevFiles/EclipseOxy/net.certiv.stdt.core/src/main/java/net/certiv/stdt/core/parser/STParser.g4 by ANTLR 4.5.3
 
 	package net.certiv.stdt.core.parser.gen;
 	
