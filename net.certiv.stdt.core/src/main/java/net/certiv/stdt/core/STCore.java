@@ -8,12 +8,8 @@ import net.certiv.dsl.core.util.Log;
 import net.certiv.dsl.core.util.Log.LogLevel;
 import net.certiv.stdt.core.parser.STSourceParserFactory;
 
-/**
- * The activator class controls the plug-in life cycle
- */
 public class STCore extends DslCore {
 
-	public static final String CONSOLE_TITLE = "ST Editor Console";
 	private static final String[] EXTENSIONS = new String[] { "st", "stg" };
 
 	private STSourceParserFactory factory;

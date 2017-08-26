@@ -11,7 +11,7 @@ import net.certiv.dsl.core.formatter.DslCodeFormatter;
 import net.certiv.dsl.core.parser.DslParseErrorListener;
 import net.certiv.dsl.core.util.Log;
 import net.certiv.stdt.core.STCore;
-import net.certiv.stdt.core.parser.gen.FormatProcessor;
+import net.certiv.stdt.core.parser.gen.FormatVisitor;
 import net.certiv.stdt.core.parser.gen.STGLexer;
 import net.certiv.stdt.core.parser.gen.STGParser;
 import net.certiv.stdt.core.parser.gen.STGParser.GroupContext;
@@ -40,17 +40,10 @@ public class STSourceFormatter extends DslCodeFormatter {
 
 		CharStream input = CharStreams.fromString(content);
 		STGLexer lexer = new STGLexer(input);
-
-		// lexer.setLexerHelper(new LexerHelper());
-		// STGTokenFactory factory = new STGTokenFactory(input);
-		// lexer.setTokenFactory(factory);
 		tokens = new CommonTokenStream(lexer);
-
 		parser = new STGParser(tokens);
-		// parser.setTokenFactory(factory);
-		parser.removeErrorListeners(); // remove ConsoleErrorListener to reduce the noise
-		parser.addErrorListener(errListener); // have to add the internal error listener
-												 // that feeds the error markers
+		parser.removeErrorListeners();
+		parser.addErrorListener(errListener);
 
 		GroupContext parseTree = ((STGParser) parser).group();
 		return parseTree;
@@ -58,14 +51,14 @@ public class STSourceFormatter extends DslCodeFormatter {
 
 	@Override
 	public void formatContent() {
-		Log.debug(this, "AST [root=" + (parseTree != null ? "not null" : "null") + "]");
+		Log.debug(this, "Parse tree [root=" + (parseTree != null ? "not null" : "null") + "]");
 		if (parseTree == null) return;
 
 		// one pass: format
 		try {
-			FormatProcessor formatter = new FormatProcessor(parseTree);
-			formatter.setHelper(this);
-			formatter.findAll();
+			FormatVisitor visitor = new FormatVisitor(parseTree);
+			visitor.setHelper(this);
+			visitor.findAll();
 		} catch (Exception e) {
 			Log.error(this, "Formatter error", e);
 		}

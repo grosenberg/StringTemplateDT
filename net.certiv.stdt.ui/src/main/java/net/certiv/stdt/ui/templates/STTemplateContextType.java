@@ -1,6 +1,6 @@
 package net.certiv.stdt.ui.templates;
 
-import net.certiv.dsl.core.model.ITranslationUnit;
+import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.ui.templates.DslTemplateContext;
 import net.certiv.dsl.ui.templates.DslTemplateContextType;
 
@@ -23,7 +23,7 @@ public class STTemplateContextType extends DslTemplateContextType {
 
 	@Override
 	public DslTemplateContext createContext(IDocument document, int completionPosition, int length,
-			ITranslationUnit sourceModule) {
+			ICodeUnit sourceModule) {
 
 		return new STTemplateContext(this, document, completionPosition, length, sourceModule);
 	}

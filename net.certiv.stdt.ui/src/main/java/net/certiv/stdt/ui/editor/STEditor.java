@@ -9,6 +9,7 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.preferences.DslPrefsKey;
 import net.certiv.dsl.core.util.Log;
+import net.certiv.dsl.core.util.Strings;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.text.folding.IFoldingStructureProvider;
@@ -37,9 +38,10 @@ public class STEditor extends DslEditor {
 	@Override
 	protected void initializeEditor() {
 		super.initializeEditor();
-		Log.debug(this, "ST editor started");
 		setEditorContextMenuId(EDITOR_CONTEXT);
 		setRulerContextMenuId(RULER_CONTEXT);
+		String name = getDslUI().getDslLanguageName().replace('_', ' ');
+		Log.info(this, Strings.titleCase(name) + " editor starting");
 	}
 
 	@Override

@@ -1,0 +1,47 @@
+xvisitor grammar Outline;
+
+options {
+	parserClass = STGParser;
+	superClass  = OutlineAdaptor;
+}
+
+@header {
+	package net.certiv.stdt.core.parser.gen;
+
+	import net.certiv.stdt.core.parser.OutlineAdaptor;
+}
+
+outline
+	: group
+	| delims
+	| imports
+	| template
+	| dict
+	;
+
+group
+	: /group
+		{ onEntry:	createModule($group, "ST Group Outline");	}
+		{ onExit:	blockEnd(); }
+	;
+
+delims
+	: /group/delimiters
+		{ createDelimStatement();	}
+	;
+
+imports
+	: /group//importSpec
+		{ createImportStatement();	}
+	;
+
+template
+	: //template
+		{ createTemplateStatement($ID, $AT != null);	}
+	;
+
+dict
+	: //dict
+		{ createDictStatement($ID.text);	}
+	;
+

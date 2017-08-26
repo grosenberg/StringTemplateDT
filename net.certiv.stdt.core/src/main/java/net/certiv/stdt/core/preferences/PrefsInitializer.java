@@ -2,15 +2,12 @@ package net.certiv.stdt.core.preferences;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.preferences.DslPrefsInit;
-import net.certiv.dsl.core.util.Log;
-import net.certiv.dsl.core.util.Log.LogLevel;
 import net.certiv.stdt.core.STCore;
 
 public class PrefsInitializer extends DslPrefsInit {
 
 	public PrefsInitializer() {
 		super();
-		Log.defLevel(LogLevel.Debug);
 	}
 
 	@Override
@@ -20,7 +17,6 @@ public class PrefsInitializer extends DslPrefsInit {
 
 	@Override
 	public void initializeDefaultPreferences() {
-		Log.debug(this, "Initializing AntlrDT ST preferences");
 		super.initializeDefaultPreferences();
 
 		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_COLON, PrefsKey.AROUND);

@@ -9,5 +9,4 @@ public class STNature extends DslNature {
 	public DslCore getDslCore() {
 		return STCore.getDefault();
 	}
-
 }

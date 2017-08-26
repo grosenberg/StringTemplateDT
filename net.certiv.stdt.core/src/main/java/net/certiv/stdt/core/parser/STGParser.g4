@@ -57,7 +57,11 @@ delimiters
 	;
 
 imports
-	: ( IMPORT STRING )+
+	: importSpec+
+	;
+
+importSpec
+	: IMPORT STRING
 	;
 
 template

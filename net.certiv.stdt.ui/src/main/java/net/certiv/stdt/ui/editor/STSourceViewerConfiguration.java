@@ -7,7 +7,6 @@ import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
-import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -16,7 +15,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.IColorManager;
-import net.certiv.dsl.core.preferences.DslPrefsKey;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
 import net.certiv.dsl.core.util.Strings;
 import net.certiv.dsl.core.util.TabStyle;
@@ -66,12 +64,12 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Loads content formatters into the SourceViewer for execution on receipt of a
-	 * ISourceViewer.FORMAT command. Where nothing is selected in the document, <b>should</b>
-	 * execute the master strategy for the default partition and then the slave strategies for the
-	 * non-default partitions.
+	 * Loads content formatters into the SourceViewer for execution on receipt of a ISourceViewer.FORMAT
+	 * command. Where nothing is selected in the document, <b>should</b> execute the master strategy for
+	 * the default partition and then the slave strategies for the non-default partitions.
 	 * 
-	 * @param sourceViewer the viewer that will contain the content to format
+	 * @param sourceViewer
+	 *            the viewer that will contain the content to format
 	 * @return the content formatter
 	 */
 	@Override
@@ -103,15 +101,8 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	@Override
-	public int getTabWidth(ISourceViewer sourceViewer) {
-		if (store == null) {
-			return super.getTabWidth(sourceViewer);
-		}
-		return store.getInt(DslPrefsKey.FORMATTER_TAB_SIZE);
-	}
-
-	@Override
 	protected void initializeScanners() {
+		IDslPrefsManager store = getPrefStore();
 		keyScanner = new ScannerKeyWord(store);
 		templateSLScanner = new ScannerTemplateSL(store);
 		commentSLScanner = new ScannerCommentSL(store);
@@ -135,7 +126,8 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	 * Clients are not allowed to call this method if the old setup with text tools is in use.
 	 * </p>
 	 * 
-	 * @param event the event to which to adapt
+	 * @param event
+	 *            the event to which to adapt
 	 * @see PythonSourceViewerConfiguration#ScriptSourceViewerConfiguration(IColorManager,
 	 *      IPreferenceStore, ITextEditor, String)
 	 */
@@ -148,10 +140,11 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Determines whether the preference change encoded by the given event changes the behavior of
-	 * one of its contained components.
+	 * Determines whether the preference change encoded by the given event changes the behavior of one
+	 * of its contained components.
 	 * 
-	 * @param event the event to be investigated
+	 * @param event
+	 *            the event to be investigated
 	 * @return <code>true</code> if event causes a behavioral change
 	 */
 	@Override
@@ -183,10 +176,10 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 		assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
-	@Override
-	public IHyperlinkDetector getDslElementHyperlinkDetector(ITextEditor textEditor) {
-		return new STHyperlinkDetector(textEditor);
-	}
+	// @Override
+	// public IHyperlinkDetector getDslElementHyperlinkDetector(ITextEditor textEditor) {
+	// return new STHyperlinkDetector(textEditor);
+	// }
 
 	@Override
 	protected String getCommentPrefix() {

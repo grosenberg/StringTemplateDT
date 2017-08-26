@@ -10,8 +10,8 @@ import net.certiv.dsl.core.parser.DslParseErrorListener;
 import net.certiv.dsl.core.parser.DslSourceParser;
 import net.certiv.dsl.core.util.Log;
 import net.certiv.stdt.core.STCore;
-import net.certiv.stdt.core.parser.gen.CodeAssistProcessor;
-import net.certiv.stdt.core.parser.gen.OutlineProcessor;
+import net.certiv.stdt.core.parser.gen.CodeAssistVisitor;
+import net.certiv.stdt.core.parser.gen.OutlineVisitor;
 import net.certiv.stdt.core.parser.gen.STGLexer;
 import net.certiv.stdt.core.parser.gen.STGParser;
 import net.certiv.stdt.core.parser.gen.STGParser.GroupContext;
@@ -24,8 +24,8 @@ public class STSourceParser extends DslSourceParser {
 	}
 
 	/**
-	 * Builds a ParseTree for the given content representing the source of a
-	 * corresponding module (file).
+	 * Builds a ParseTree for the given content representing the source of a corresponding module
+	 * (file).
 	 */
 	@Override
 	public ParseTree parse(String name, String content, DslParseErrorListener errListener) throws RecognitionException {
@@ -49,34 +49,32 @@ public class STSourceParser extends DslSourceParser {
 	}
 
 	/**
-	 * Build the internal minimal model used as the structure basis for the outline
-	 * view, etc.
+	 * Build the internal minimal model used as the structure basis for the outline view, etc.
 	 */
 	@Override
 	public void buildModel() {
-		Log.debug(this, "Model [root=" + (parseTree != null ? "not null" : "null") + "]");
+		Log.debug(this, "Model [root=" + (tree != null ? "not null" : "null") + "]");
 
 		try {
-			OutlineProcessor oProcessor = new OutlineProcessor(parseTree);
-			oProcessor.setHelper(this);
-			oProcessor.findAll();
+			OutlineVisitor walker = new OutlineVisitor(tree);
+			walker.setHelper(this);
+			walker.findAll();
 		} catch (IllegalArgumentException e) {
 			Log.error(this, "Model - Outline processing error", e);
 		}
 	}
 
 	/**
-	 * Tree pattern matcher used to identify the code elements that may be
-	 * signficant in CodeAssist operations
+	 * Tree walker used to identify the code elements that may be signficant in CodeAssist operations
 	 */
 	@Override
 	public void buildCodeAssist() {
-		Log.debug(this, "CodeAssist [root=" + (parseTree != null ? "not null" : "null") + "]");
+		Log.debug(this, "CodeAssist [root=" + (tree != null ? "not null" : "null") + "]");
 
 		try {
-			CodeAssistProcessor caProcessor = new CodeAssistProcessor(parseTree);
-			caProcessor.setHelper(this);
-			caProcessor.findAll();
+			CodeAssistVisitor walker = new CodeAssistVisitor(tree);
+			walker.setHelper(this);
+			walker.findAll();
 		} catch (Exception e) {
 			Log.error(this, "CodeAssist - Tree walk error", e);
 		}

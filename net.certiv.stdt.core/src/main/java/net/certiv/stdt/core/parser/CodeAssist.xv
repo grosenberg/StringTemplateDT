@@ -1,0 +1,29 @@
+xvisitor grammar CodeAssist;
+
+options {
+	parserClass = STGParser;
+}
+
+@header {
+	
+	package net.certiv.stdt.core.parser.gen;
+
+	import net.certiv.stdt.core.parser.STSourceParser;
+}
+
+@members {
+
+	private STSourceParser helper;
+
+	public void setHelper(STSourceParser helper) {
+		this.helper = helper;
+	}
+}
+
+codeAssist
+	: templateId
+	;
+
+templateId
+	: //template 		{ helper.addCodeAssistElement($ID); } ;
+

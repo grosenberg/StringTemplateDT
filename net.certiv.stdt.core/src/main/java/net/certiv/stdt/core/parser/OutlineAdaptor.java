@@ -2,14 +2,15 @@ package net.certiv.stdt.core.parser;
 
 import java.util.List;
 
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import net.certiv.antlr.runtime.xvisitor.Processor;
-import net.certiv.dsl.core.parser.IModelConstruction;
+import net.certiv.dsl.core.parser.IModelAssembly;
 import net.certiv.stdt.core.parser.gen.STGParser.DelimitersContext;
 import net.certiv.stdt.core.parser.gen.STGParser.DictContext;
-import net.certiv.stdt.core.parser.gen.STGParser.ImportsContext;
+import net.certiv.stdt.core.parser.gen.STGParser.ImportSpecContext;
 import net.certiv.stdt.core.parser.gen.STGParser.TemplateContext;
 
 /**
@@ -20,13 +21,13 @@ import net.certiv.stdt.core.parser.gen.STGParser.TemplateContext;
  */
 public abstract class OutlineAdaptor extends Processor {
 
-	protected IModelConstruction helper;
+	protected IModelAssembly helper;
 
 	public OutlineAdaptor(ParseTree tree) {
 		super(tree);
 	}
 
-	public void setHelper(IModelConstruction helper) {
+	public void setHelper(IModelAssembly helper) {
 		this.helper = helper;
 	}
 
@@ -35,11 +36,13 @@ public abstract class OutlineAdaptor extends Processor {
 		helper.module(root, customData);
 	}
 
-	public void createTemplateStatement(String name, boolean at) {
+	public void createTemplateStatement(List<Token> tokens, boolean at) {
 		TemplateContext ctx = (TemplateContext) lastPathNode();
 		ModelType mType = at ? ModelType.Region : ModelType.Template;
-		ModelData data = new ModelData(mType, ctx, name);
-		helper.statement(ctx, ctx.ID().get(0), data);
+		for (int idx = 0; idx < tokens.size(); idx++) {
+			ModelData data = new ModelData(mType, ctx, tokens.get(idx).getText());
+			helper.statement(ctx, ctx.ID(idx), data);
+		}
 	}
 
 	public void createDelimStatement() {
@@ -52,11 +55,9 @@ public abstract class OutlineAdaptor extends Processor {
 	}
 
 	public void createImportStatement() {
-		ImportsContext ctx = (ImportsContext) lastPathNode();
-		for (TerminalNode node : ctx.STRING()) {
-			ModelData data = new ModelData(ModelType.Import, ctx, node.getText());
-			helper.statement(ctx, ctx, data);
-		}
+		ImportSpecContext ctx = (ImportSpecContext) lastPathNode();
+		ModelData data = new ModelData(ModelType.Import, ctx, ctx.STRING().getText());
+		helper.statement(ctx, ctx, data);
 	}
 
 	public void createDictStatement(String id) {

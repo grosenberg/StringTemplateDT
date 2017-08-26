@@ -20,7 +20,7 @@ import net.certiv.stdt.ui.preferences.formatter.FormatterFactory;
 public class STUI extends DslUI {
 
 	// Should be unique, lower case, single word
-	private static final String DSL_NAME = "antlrdt.st";
+	private static final String DSL_NAME = "string_template";
 
 	private static STUI plugin;
 	private DslTextTools textTools;

@@ -1,6 +1,6 @@
 package net.certiv.stdt.ui.editor.completion;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.v4.runtime.Token;
 import org.eclipse.jface.viewers.StyledString;
@@ -9,7 +9,7 @@ import org.eclipse.swt.graphics.Image;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.completion.CompletionProposal;
 import net.certiv.dsl.core.model.DslModelException;
-import net.certiv.dsl.core.model.ITranslationUnit;
+import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.text.completion.CompletionLabelProvider;
 import net.certiv.dsl.ui.text.completion.DslCollector;
@@ -20,8 +20,8 @@ import net.certiv.stdt.ui.editor.text.ScannerKeyWord;
 
 public class STCollector extends DslCollector {
 
-	public STCollector(ITranslationUnit tu) {
-		super(tu);
+	public STCollector(ICodeUnit cu) {
+		super(cu);
 	}
 
 	@Override
@@ -40,15 +40,16 @@ public class STCollector extends DslCollector {
 	}
 
 	@Override
-	protected DslCompletionProposal createDslCompletionProposal(String completion, int start, int length, Image image,
+	protected DslCompletionProposal createDslCompletionProposal(String completion, int offset, int length, Image image,
 			String label, int relevance) {
-		return createDslCompletionProposal(completion, start, length, image, new StyledString(label), relevance, false);
+		return createDslCompletionProposal(completion, offset, length, image, new StyledString(label), relevance,
+				false);
 	}
 
 	@Override
-	protected DslCompletionProposal createDslCompletionProposal(String completion, int start, int length, Image image,
+	protected DslCompletionProposal createDslCompletionProposal(String completion, int offset, int length, Image image,
 			StyledString label, int relevance, boolean inDoc) {
-		return new STCompletionProposal(completion, start, length, image, label, relevance, inDoc);
+		return new STCompletionProposal(completion, offset, length, image, label, relevance, inDoc);
 	}
 
 	@Override
@@ -60,12 +61,12 @@ public class STCollector extends DslCollector {
 	 * @param offset invocation offset
 	 */
 	@Override
-	public void prepareProposals(ITranslationUnit sourceModule, int offset) throws DslModelException {
+	public void prepareProposals(ICodeUnit unit, int offset) throws DslModelException {
 
 		if (!parseValid()) return;
 
 		// 1) handle lexer and parser rule names: captured as a list of tokens
-		ArrayList<Token> rules = sourceModule.getSourceParser().getCodeAssistElements();
+		List<Token> rules = getDslCore().getModelManager().getCodeAssistElements(unit);
 		for (Token rule : rules) {
 			char[] name = rule.getText().toCharArray();
 			int type = CompletionProposal.METHOD_REF; // parser
