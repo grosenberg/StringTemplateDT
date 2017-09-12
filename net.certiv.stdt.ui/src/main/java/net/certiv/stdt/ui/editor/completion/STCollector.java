@@ -1,8 +1,7 @@
 package net.certiv.stdt.ui.editor.completion;
 
-import java.util.List;
+import java.util.Set;
 
-import org.antlr.v4.runtime.Token;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 
@@ -10,6 +9,7 @@ import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.completion.CompletionProposal;
 import net.certiv.dsl.core.model.DslModelException;
 import net.certiv.dsl.core.model.ICodeUnit;
+import net.certiv.dsl.core.model.IStatement;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.text.completion.CompletionLabelProvider;
 import net.certiv.dsl.ui.text.completion.DslCollector;
@@ -66,9 +66,9 @@ public class STCollector extends DslCollector {
 		if (!parseValid()) return;
 
 		// 1) handle lexer and parser rule names: captured as a list of tokens
-		List<Token> rules = getDslCore().getModelManager().getCodeAssistElements(unit);
-		for (Token rule : rules) {
-			char[] name = rule.getText().toCharArray();
+		Set<IStatement> rules = getDslCore().getModelManager().getCodeAssistElements(unit);
+		for (IStatement rule : rules) {
+			char[] name = rule.getElementName().toCharArray();
 			int type = CompletionProposal.METHOD_REF; // parser
 			if (Character.isUpperCase(name[0])) type = CompletionProposal.FIELD_REF; // lexer
 			CompletionProposal proposal = CompletionProposal.create(type, offset);

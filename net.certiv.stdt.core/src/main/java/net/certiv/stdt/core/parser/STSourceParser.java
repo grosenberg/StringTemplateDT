@@ -9,24 +9,27 @@ import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.parser.DslParseErrorListener;
 import net.certiv.dsl.core.parser.DslSourceParser;
 import net.certiv.dsl.core.util.Log;
+import net.certiv.dsl.core.util.Log.LogLevel;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.core.parser.gen.CodeAssistVisitor;
-import net.certiv.stdt.core.parser.gen.OutlineVisitor;
 import net.certiv.stdt.core.parser.gen.STGLexer;
 import net.certiv.stdt.core.parser.gen.STGParser;
 import net.certiv.stdt.core.parser.gen.STGParser.GroupContext;
+import net.certiv.stdt.core.parser.gen.StructureVisitor;
 
 public class STSourceParser extends DslSourceParser {
+
+	public STSourceParser() {
+		super();
+		Log.setLevel(this, LogLevel.Info);
+	}
 
 	@Override
 	public DslCore getDslCore() {
 		return STCore.getDefault();
 	}
 
-	/**
-	 * Builds a ParseTree for the given content representing the source of a corresponding module
-	 * (file).
-	 */
+	/** Builds a ParseTree for the given content representing the source of a corresponding unit. */
 	@Override
 	public ParseTree parse(String name, String content, DslParseErrorListener errListener) throws RecognitionException {
 		Log.debug(this, "Parse [name=" + name + "]");
@@ -41,8 +44,8 @@ public class STSourceParser extends DslSourceParser {
 
 		parser = new STGParser(tokens);
 		// parser.setTokenFactory(factory);
-		parser.removeErrorListeners(); // remove ConsoleErrorListener to reduce the noise
-		parser.addErrorListener(errListener); // add internal error listener to feed error markers
+		parser.removeErrorListeners();
+		parser.addErrorListener(errListener);
 		GroupContext parseTree = ((STGParser) parser).group();
 
 		return parseTree;
@@ -52,11 +55,11 @@ public class STSourceParser extends DslSourceParser {
 	 * Build the internal minimal model used as the structure basis for the outline view, etc.
 	 */
 	@Override
-	public void buildModel() {
+	public void buildStructure() {
 		Log.debug(this, "Model [root=" + (tree != null ? "not null" : "null") + "]");
 
 		try {
-			OutlineVisitor walker = new OutlineVisitor(tree);
+			StructureVisitor walker = new StructureVisitor(tree);
 			walker.setHelper(this);
 			walker.findAll();
 		} catch (IllegalArgumentException e) {

@@ -1,18 +1,14 @@
 package net.certiv.stdt.core.parser;
 
 public enum ModelType {
-
-	DocComment,
-	BlockComment,
-	LineComment,
-	ST,
-	STG,
-	Alias,
-	Region,
-	Template,
-	Dict,
-	Import,
+	Group,
 	Delims,
+	Imports,
+	Template,
+	Region,
+	Dict,
+
 	Block,
-	BlockEnd;
+	Key,
+	Value;
 }

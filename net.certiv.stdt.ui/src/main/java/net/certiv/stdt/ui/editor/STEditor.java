@@ -2,16 +2,16 @@ package net.certiv.stdt.ui.editor;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension3;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.preferences.DslPrefsKey;
-import net.certiv.dsl.core.util.Log;
-import net.certiv.dsl.core.util.Strings;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.DslEditor;
+import net.certiv.dsl.ui.text.DslWordFinder;
 import net.certiv.dsl.ui.text.folding.IFoldingStructureProvider;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
@@ -27,11 +27,13 @@ public class STEditor extends DslEditor {
 	private static final String MARK_OCCURRENCES_ANNOTATION_TYPE = "net.certiv.stdt.ui.occurrences";
 	private static final char[] PAIRS = new char[] { '{', '}', '(', ')', '[', ']', '<', '>', '$', '$' };
 
-	private DefaultCharacterPairMatcher pairMatcher = null;
-	private IFoldingStructureProvider foldingProvider = null;
+	private DefaultCharacterPairMatcher pairMatcher;
+	private IFoldingStructureProvider foldingProvider;
+	private DslWordFinder finder;
 
 	public STEditor() {
 		super();
+		// must init on construction
 		pairMatcher = new DefaultCharacterPairMatcher(PAIRS, Partitions.ST_PARTITIONING);
 	}
 
@@ -40,8 +42,7 @@ public class STEditor extends DslEditor {
 		super.initializeEditor();
 		setEditorContextMenuId(EDITOR_CONTEXT);
 		setRulerContextMenuId(RULER_CONTEXT);
-		String name = getDslUI().getDslLanguageName().replace('_', ' ');
-		Log.info(this, Strings.titleCase(name) + " editor starting");
+		finder = new DslWordFinder();
 	}
 
 	@Override
@@ -69,6 +70,11 @@ public class STEditor extends DslEditor {
 	@Override
 	public char[] getBrackets() {
 		return STTextTools.PAIRS;
+	}
+
+	@Override
+	protected IRegion findWord(IDocument doc, int offset) {
+		return finder.findWord(doc, offset);
 	}
 
 	@Override

@@ -20,18 +20,6 @@ public class STOutlineLabelDecorator extends OutlineLabelDecorator {
 	}
 
 	public String decorateText(String text) {
-		switch (getElementKind()) {
-			case IDslElement.MODULE:
-				return text;
-			case IDslElement.STATEMENT:
-				return text;
-			case IDslElement.BLOCK:
-				// convert the custom Object as needed
-				ModelData customData = (ModelData) getData();
-				if (customData != null) {
-					return customData.name;
-				}
-		}
 		return text;
 	}
 
@@ -48,7 +36,8 @@ public class STOutlineLabelDecorator extends OutlineLabelDecorator {
 				baseImage = getImageProvider().DESC_OBJ_STATEMENT;
 				type = 2;
 				break;
-			case IDslElement.BLOCK:
+			case IDslElement.BEG_BLOCK:
+			case IDslElement.END_BLOCK:
 				baseImage = getImageProvider().DESC_OBJ_BLOCK;
 				type = 3;
 				break;

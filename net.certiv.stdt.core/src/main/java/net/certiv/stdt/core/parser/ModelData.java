@@ -2,22 +2,28 @@ package net.certiv.stdt.core.parser;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-public class ModelData {
+import net.certiv.dsl.core.model.IStatement.Form;
+import net.certiv.dsl.core.model.IStatement.Realm;
+import net.certiv.dsl.core.model.IStatement.Type;
+import net.certiv.dsl.core.model.util.IDescriptionData;
+
+public class ModelData implements IDescriptionData {
 
 	// overlay type
 	public static final int COMBINED = 1 << 0;
 
-	public String name = "";
 	public int decoration = 0;
+	public Type type = Type.VARIABLE;
+	public Form form = Form.DECLARATION;
+	public Realm realm = Realm.LOCAL;
 
-	public ModelData(String name, int decoration) {
-		this.name = name;
-		this.decoration = decoration;
+	public ModelType mType;
+	public ParseTree rootNode;
+	public String key;
+
+	public ModelData(ModelType mType, ParseTree rootNode, String key) {
+		this.mType = mType;
+		this.rootNode = rootNode;
+		this.key = key;
 	}
-
-	public ModelData(String name) {
-		this.name = name;
-	}
-
-	public ModelData(ModelType object, ParseTree ctx, String text) {}
 }

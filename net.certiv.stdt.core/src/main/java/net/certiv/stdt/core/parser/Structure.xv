@@ -1,17 +1,16 @@
-xvisitor grammar Outline;
+xvisitor grammar Structure ;
 
 options {
-	parserClass = STGParser;
-	superClass  = OutlineAdaptor;
+	parserClass = STGParser ;
+	superClass  = StructureAdaptor ;
 }
 
 @header {
 	package net.certiv.stdt.core.parser.gen;
-
-	import net.certiv.stdt.core.parser.OutlineAdaptor;
+	import net.certiv.stdt.core.parser.StructureAdaptor;
 }
 
-outline
+structure
 	: group
 	| delims
 	| imports
@@ -21,7 +20,7 @@ outline
 
 group
 	: /group
-		{ onEntry:	createModule($group, "ST Group Outline");	}
+		{ onEntry:	createGroup();	}
 		{ onExit:	blockEnd(); }
 	;
 
@@ -37,11 +36,11 @@ imports
 
 template
 	: //template
-		{ createTemplateStatement($ID, $AT != null);	}
+		{ createTemplateStatement();	}
 	;
 
 dict
 	: //dict
-		{ createDictStatement($ID.text);	}
+		{ createDictStatement();	}
 	;
 

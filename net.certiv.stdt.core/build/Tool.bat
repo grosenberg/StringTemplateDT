@@ -36,7 +36,7 @@ cd /d %src%
 java org.antlr.v4.Tool -visitor -o gen STGLexer.g4 STGParser.g4 STLexer.g4 STParser.g4
 echo Grammars generated
 
-java net.certiv.antlr.xvisitor.Tool -v warn -o gen Outline.xv CodeAssist.xv Format.xv
+java net.certiv.antlr.xvisitor.Tool -v warn -o gen Structure.xv CodeAssist.xv Format.xv
 echo XVisitors generated
 
 set ENDTIME=%TIME%
