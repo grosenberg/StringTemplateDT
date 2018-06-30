@@ -82,4 +82,9 @@ public class STSourceParser extends DslSourceParser {
 			Log.error(this, "CodeAssist - Tree walk error", e);
 		}
 	}
+
+	@Override
+	public String resolvePackageName() {
+		return "";
+	}
 }

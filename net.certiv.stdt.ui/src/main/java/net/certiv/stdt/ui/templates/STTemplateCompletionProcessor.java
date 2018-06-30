@@ -1,7 +1,7 @@
 package net.certiv.stdt.ui.templates;
 
+import net.certiv.dsl.ui.editor.text.completion.DslContentAssistInvocationContext;
 import net.certiv.dsl.ui.templates.DslTemplateCompletionProcessor;
-import net.certiv.dsl.ui.text.completion.DslContentAssistInvocationContext;
 import net.certiv.stdt.ui.STUI;
 import net.certiv.stdt.ui.editor.Partitions;
 

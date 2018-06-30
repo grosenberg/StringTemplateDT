@@ -2,7 +2,7 @@
 <feature
       id="net.certiv.stdt.feature"
       label="StringTemplateDT"
-      version="4.7.0.qualifier"
+      version="4.8.0.qualifier"
       provider-name="Certiv Analytics">
 
    <description>
@@ -233,32 +233,21 @@ litigation.
       <update label="Certiv Tools" url="http://www.certiv.net/updates"/>
    </url>
 
-   <includes
-         id="net.certiv.dsl.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="net.certiv.feature"
-         version="0.0.0"/>
-
    <requires>
-      <import plugin="net.certiv.dsl.core" version="0.5.5" match="greaterOrEqual"/>
-      <import plugin="net.certiv.dsl.ui" version="0.5.5" match="greaterOrEqual"/>
-      <import plugin="net.certiv.dsl.lib" version="0.5.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.9.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.106.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.text" version="3.5.300" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.io"/>
-      <import plugin="net.certiv.certivtools" version="1.0.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface.text" version="3.9.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.search" version="3.9.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.editors" version="3.8.200" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.10.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.workbench.texteditor" version="3.9.0" match="greaterOrEqual"/>
-      <import plugin="net.certiv.stdt.core" version="4.1.0" match="greaterOrEqual"/>
-      <import feature="net.certiv.dsl.feature" version="0.5.5.20160626-0309"/>
-      <import feature="net.certiv.feature" version="1.0.6.20160624-2152"/>
+      <import plugin="net.certiv.tools"/>
+      <import plugin="net.certiv.dsl.core"/>
+      <import plugin="net.certiv.dsl.lib"/>
+      <import plugin="net.certiv.dsl.ui"/>
    </requires>
 
    <plugin

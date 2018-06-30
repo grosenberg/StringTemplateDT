@@ -9,11 +9,9 @@ public class Partitions {
 	public static final String COMMENT_SL = "__comment_single_line";
 	public static final String COMMENT_ML = "__comment_multi_line";
 	public static final String COMMENT_JD = "__comment_java_doc";
-	public static final String TEMPLATE_GP = "__template_group";
-	public static final String TEMPLATE_SL = "__template_single_line";
 
-	public static final String[] SPECIAL_TYPES = new String[] { COMMENT_SL, COMMENT_ML, COMMENT_JD, TEMPLATE_GP, TEMPLATE_SL, };
-	public static final String[] STRING_AND_COMMENT_TYPES = new String[] { COMMENT_JD, COMMENT_ML, COMMENT_SL};
+	public static final String[] SPECIAL_TYPES = new String[] { COMMENT_SL, COMMENT_ML, COMMENT_JD, };
+	public static final String[] STRING_AND_COMMENT_TYPES = new String[] { COMMENT_JD, COMMENT_ML, COMMENT_SL };
 	public static final String[] COMMENT_TYPES = new String[] { COMMENT_JD, COMMENT_ML, COMMENT_SL };
 	public static final String[] STRING_TYPES = new String[] {};
 

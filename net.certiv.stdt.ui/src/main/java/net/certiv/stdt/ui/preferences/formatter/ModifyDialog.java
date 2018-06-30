@@ -10,11 +10,9 @@ public class ModifyDialog extends FormatterModifyDialog {
 		super(dialogOwner, dslFormatterFactory);
 	}
 
+	@Override
 	protected void addPages() {
-		addTabPage("Indents", new TabPageIndentation(this));
-		addTabPage("White Space", new TabPageWhiteSpace(this));
+		addTabPage("General", new TabPageGeneral(this));
 		addTabPage("Blank Lines", new TabPageBlankLines(this));
-		// addTabPage("Line Breaks", new TabPageLineBreaks(this));
-		// addTabPage("Comments", new TabPageComments(this));
 	}
 }

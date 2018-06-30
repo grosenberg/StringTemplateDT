@@ -19,26 +19,21 @@ public class PrefsInitializer extends DslPrefsInit {
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
 
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_COLON, PrefsKey.AROUND);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_ASSIGN, PrefsKey.NONE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_COMMA, PrefsKey.AFTER);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_LBRACKET, PrefsKey.BEFORE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_RBRACKET, PrefsKey.NONE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_PAREN, PrefsKey.BEFORE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_SPACE_TMPL_ASSIGN, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_SPACE_COLON, PrefsKey.AROUND);
+		setString(PrefsKey.FORMAT_SPACE_ASSIGN, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_SPACE_COMMA, PrefsKey.AFTER);
+		setString(PrefsKey.FORMAT_SPACE_LBRACKET, PrefsKey.BEFORE);
+		setString(PrefsKey.FORMAT_SPACE_RBRACKET, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_SPACE_PAREN, PrefsKey.BEFORE);
+		setString(PrefsKey.FORMAT_SPACE_TMPL_ASSIGN, PrefsKey.NONE);
 
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_COLON, PrefsKey.NONE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_COMMA, PrefsKey.NONE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_LBRACKET, PrefsKey.AFTER);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_RBRACKET, PrefsKey.AFTER);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_OBRACKET, PrefsKey.NONE);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_WRAP_CBRACKET, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_WRAP_COLON, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_WRAP_COMMA, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_WRAP_LBRACKET, PrefsKey.AFTER);
+		setString(PrefsKey.FORMAT_WRAP_RBRACKET, PrefsKey.AFTER);
+		setString(PrefsKey.FORMAT_WRAP_OBRACKET, PrefsKey.NONE);
+		setString(PrefsKey.FORMAT_WRAP_CBRACKET, PrefsKey.NONE);
 
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMAT_LIST_COMMA, PrefsKey.AFTER);
-
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMATTER_COMMENT_HEADER_ENABLE, false);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMATTER_COMMENT_FORMAT, false);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMATTER_INDENT_COMMENT_MULTILINE, false);
-		getDslCore().getPrefsManager().setValue(PrefsKey.FORMATTER_INDENT_COMMENT_SINGLELINE, false);
+		setString(PrefsKey.FORMAT_LIST_COMMA, PrefsKey.AFTER);
 	}
 }

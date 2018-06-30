@@ -2,6 +2,7 @@ package net.certiv.stdt.core.parser;
 
 import net.certiv.dsl.core.formatter.IDslCodeFormatter;
 import net.certiv.dsl.core.parser.DslSourceParserFactory;
+import net.certiv.stdt.core.formatter.STSourceFormatter;
 
 public class STSourceParserFactory extends DslSourceParserFactory {
 

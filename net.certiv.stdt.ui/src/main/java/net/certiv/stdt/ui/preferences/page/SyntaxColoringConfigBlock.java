@@ -33,9 +33,9 @@ public class SyntaxColoringConfigBlock extends AbstractEditorColoringConfigurati
 	private static final String PREVIEW_FILE_NAME = "PrefsColorSample.stg";
 
 	private static final String[][] fSyntaxColorListModel = new String[][] {
+			{ "JavaDoc Comment", PrefsKey.EDITOR_COMMENT_JD_COLOR, CmtsCat },
 			{ "Multi-line Comment", PrefsKey.EDITOR_COMMENT_ML_COLOR, CmtsCat },
 			{ "Single line Comment", PrefsKey.EDITOR_COMMENT_SL_COLOR, CmtsCat },
-			{ "Strings", PrefsKey.EDITOR_STRING_COLOR, CoreCat },
 			{ "Keywords", PrefsKey.EDITOR_KEYWORDS_COLOR, CoreCat } };
 
 	public SyntaxColoringConfigBlock(DslPrefsManagerDelta delta, PreferencePage page) {

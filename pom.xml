@@ -6,7 +6,7 @@
 
 	<groupId>net.certiv</groupId>
 	<artifactId>net.certiv.stdt</artifactId>
-	<version>4.7.0-SNAPSHOT</version>
+	<version>4.8.0-SNAPSHOT</version>
 
 	<name>net.certiv.stdt :: parent</name>
 	<description>net.certiv.stdt parent</description>
@@ -25,7 +25,7 @@
 		<repository>
 			<id>eclipse-oxygen</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/oxygen</url>
+			<url>http://download.eclipse.org/releases/photon</url>
 		</repository>
 		<repository>
 			<id>dsl</id>
@@ -35,7 +35,7 @@
 		<repository>
 			<id>tools</id>
 			<layout>p2</layout>
-			<url>file:/D:/DevFiles/Eclipse/Tools/net.certiv/net.certiv.site/target/repository/</url>
+			<url>file:/D:/DevFiles/Eclipse/Certiv/net.certiv/net.certiv.tools.site/target/repository/</url>
 		</repository>
 	</repositories>
 

@@ -2,9 +2,10 @@
  * Sample StringTemplate for demonstrating
  * context dependent syntax coloring  <Javadoc>
  */
-group PrefsColorSample;
+//group PrefsColorSample;
 
 assign(name, value) ::= <<assign("<name>", <value>);>>
+
 /*
  * <Multi-line comment>
  */

@@ -8,10 +8,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
 
-import net.certiv.dsl.ui.text.completion.ContentAssistInvocationContext;
-import net.certiv.dsl.ui.text.completion.DslCollector;
-import net.certiv.dsl.ui.text.completion.DslCompletionProposalComputer;
-import net.certiv.dsl.ui.text.completion.DslContentAssistInvocationContext;
+import net.certiv.dsl.ui.editor.text.completion.ContentAssistInvocationContext;
+import net.certiv.dsl.ui.editor.text.completion.DslCollector;
+import net.certiv.dsl.ui.editor.text.completion.DslCompletionProposalComputer;
+import net.certiv.dsl.ui.editor.text.completion.DslContentAssistInvocationContext;
 import net.certiv.stdt.ui.templates.STTemplateCompletionProcessor;
 
 public class STCodeCompletionComputer extends DslCompletionProposalComputer {

@@ -1,6 +1,6 @@
 /*	[The "BSD license"]
- *	Copyright (c) 2011-2014 Terence Parr
- *	Copyright (c) 2013-2015 Gerald Rosenberg
+ *	Copyright (c) 2011-2017 Terence Parr
+ *	Copyright (c) 2013-2017 Gerald Rosenberg
  *	All rights reserved.
  *
  *	Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,7 @@
  *	THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-/*	Antlr grammar for StringTemplate v4.
- *
- *	Modified 2013.11.21 gbr
- *	-- updated
- *	Modified 2015.06.21 gbr
- *	-- updated to use imported standard fragments
- */
+/*	Antlr grammar for StringTemplate v4. */
 
 parser grammar STParser;
 
@@ -47,11 +41,7 @@ options {
 }
 
 template	
-	: elements EOF
-	;
-
-elements
-	: element*
+	: element* EOF
 	;
 
 element
@@ -75,19 +65,19 @@ exprTag
 
 region
 	: LDELIM AT ID RDELIM
-	  elements
+	  element*
 	  LDELIM END RDELIM
 	;
 
 subtemplate
-	: LBRACE ( ID ( COMMA  ID )* PIPE )? elements RBRACE
+	: LBRACE ( ID ( COMMA  ID )* PIPE )? element* RBRACE
 	;
 
 ifstat
 	: LDELIM IF LPAREN conditional RPAREN RDELIM
-	  elements
-	  ( LDELIM ELSEIF LPAREN conditional RPAREN RDELIM elements )*
-	  ( LDELIM ELSE RDELIM elements )?
+	  element*
+	  ( LDELIM ELSEIF LPAREN conditional RPAREN RDELIM element* )*
+	  ( LDELIM ELSE RDELIM element* )?
 	  LDELIM ENDIF RDELIM
 	;
 

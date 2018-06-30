@@ -1,6 +1,6 @@
 package net.certiv.stdt.ui.editor.text;
 
-import net.certiv.dsl.ui.text.rules.IWordDetector2;
+import net.certiv.dsl.ui.editor.text.rules.IWordDetector2;
 
 public class WordDetector implements IWordDetector2 {
 

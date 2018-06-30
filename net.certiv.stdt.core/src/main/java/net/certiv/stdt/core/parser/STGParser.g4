@@ -1,6 +1,6 @@
 /*	[The "BSD license"]
- *	Copyright (c) 2011-2014 Terence Parr
- *	Copyright (c) 2013-2015 Gerald Rosenberg
+ *	Copyright (c) 2011-2017 Terence Parr
+ *	Copyright (c) 2013-2017 Gerald Rosenberg
  *	All rights reserved.
  *
  *	Redistribution and use in source and binary forms, with or without
@@ -26,34 +26,33 @@
  *	THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-/*	Antlr grammar for StringTemplate v4.
- *
- *	Modified 2013.11.21 gbr
- *	-- updated
- *	Modified 2015.06.21 gbr
- *	-- updated to use imported standard fragments
- */
+/*	Antlr grammar for StringTemplate v4. */
 
 parser grammar STGParser;
 
 options {
-	language=Java;
 	tokenVocab=STGLexer;
 }
 
 @header {
-	package net.certiv.stdt.core.parser.gen;
-	
+	package net.certiv.adept.lang.st.parser.gen;
 }
 
 group
-	: delimiters? imports?
-	( template | dict )+
-	EOF
+	:	groupSpec?
+		delimiters?
+		imports?
+		( template | dict )+
+		EOF
+	;
+
+// Optional group naming statement
+groupSpec
+	: GROUP ID .*? SEMI
 	;
 
 delimiters
-	: DELIMITERS STRING COMMA STRING
+	: DELIMITERS beg=STRING COMMA end=STRING
 	;
 
 imports
@@ -65,32 +64,39 @@ importSpec
 	;
 
 template
-	: ( AT ID DOT ID LPAREN RPAREN
-	  | ID LPAREN formalArgs? RPAREN
+	: ( AT encl=ID DOT name=ID LPAREN RPAREN
+	  | name=ID LPAREN formalArgList? RPAREN
 	  )
-		TMPL_ASSIGN
+		ASSIGN
 			( STRING			// "..."
 			| BIGSTRING			// <<...>>
 			| BIGSTRING_NO_NL	// <%...%>
 			)
-	| ID TMPL_ASSIGN ID			// alias one template to another
+	| alias=ID ASSIGN target=ID	// alias one template to another
 	;
 
-formalArgs
-	: formalArg ( COMMA formalArg )*
+formalArgList
+	: formalArg commaArg*
+	;
+
+commaArg
+	: COMMA formalArg
 	;
 
 formalArg
-	: ID 	( ASSIGN STRING
-			| ASSIGN ANON_TEMPLATE
-			| ASSIGN TRUE
-			| ASSIGN FALSE
-			| ASSIGN LBRACK RBRACK
-			)?
+	: ID
+		( EQUAL
+			( STRING
+			| ANON_TEMPLATE
+			| TRUE
+			| FALSE
+			| LBRACK RBRACK
+			)
+		)?
 	;
 
 dict
-	: ID TMPL_ASSIGN LBRACK dictPairs RBRACK
+	: ID ASSIGN LBRACK dictPairs RBRACK
 	;
 
 dictPairs
@@ -99,7 +105,7 @@ dictPairs
 	;
 
 keyValuePair		: STRING  COLON keyValue ;
-defaultValuePair	: DEFAULT COLON keyValue ;
+defaultValuePair	: ID { "default".equals($ID.text) }? COLON keyValue ;
 
 keyValue
 	: BIGSTRING
@@ -109,5 +115,5 @@ keyValue
 	| TRUE
 	| FALSE
 	| LBRACK RBRACK
-	| KEY
+	| ID { "key".equals($ID.text) }?
 	;

@@ -28,8 +28,9 @@ public class TabPageBlankLines extends FormatterModifyTabPage {
 				"Required blank lines after terminal: ");
 	}
 
+	@Override
 	protected URL getPreviewContent() {
-		return getClass().getResource("BlankLinesPreview.stg"); //$NON-NLS-1$
+		return getClass().getResource("PreviewBlanklines.stg"); //$NON-NLS-1$
 	}
 
 	@Override
