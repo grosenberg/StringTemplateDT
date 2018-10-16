@@ -9,8 +9,8 @@ import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
-import net.certiv.dsl.ui.editor.text.AbstractBufferedRuleBasedScanner;
-import net.certiv.stdt.core.preferences.PrefsKey;
+import net.certiv.dsl.ui.editor.scanners.AbstractBufferedRuleBasedScanner;
+import net.certiv.stdt.core.preferences.Prefs;
 
 public class ScannerMLComment extends AbstractBufferedRuleBasedScanner {
 
@@ -24,7 +24,7 @@ public class ScannerMLComment extends AbstractBufferedRuleBasedScanner {
 	@Override
 	protected String[] getTokenProperties() {
 		if (tokens == null) {
-			tokens = new String[] { bind(PrefsKey.EDITOR_COMMENT_ML_COLOR) };
+			tokens = new String[] { bind(Prefs.EDITOR_COMMENT_ML_COLOR) };
 		}
 		return tokens;
 	}
@@ -32,7 +32,7 @@ public class ScannerMLComment extends AbstractBufferedRuleBasedScanner {
 	@Override
 	protected List<IRule> createRules() {
 		List<IRule> rules = new ArrayList<IRule>();
-		IToken token = getToken(bind(PrefsKey.EDITOR_COMMENT_ML_COLOR));
+		IToken token = getToken(bind(Prefs.EDITOR_COMMENT_ML_COLOR));
 		// setDefaultReturnToken(token);
 		rules.add(new MultiLineRule("/*", "*/", token, '\\'));
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));

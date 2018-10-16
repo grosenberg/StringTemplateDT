@@ -4,7 +4,7 @@ import org.eclipse.jface.text.IDocument;
 
 public class Partitions {
 
-	public final static String ST_PARTITIONING = "__st_partitioning";
+	public final static String PARTITIONING = "__st_partitioning";
 
 	public static final String COMMENT_SL = "__comment_single_line";
 	public static final String COMMENT_ML = "__comment_multi_line";

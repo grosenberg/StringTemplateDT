@@ -35,7 +35,7 @@ options {
 }
 
 @header {
-	package net.certiv.adept.lang.st.parser.gen;
+	package net.certiv.stdt.core.parser.gen;
 }
 
 group

@@ -8,14 +8,14 @@ import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.formatter.FormatterModifyTabPage;
 import net.certiv.dsl.ui.formatter.IFormatterModifyDialog;
-import net.certiv.dsl.ui.preferences.IControlCreationManager;
+import net.certiv.dsl.ui.preferences.bind.IControlCreationManager;
 import net.certiv.stdt.core.STCore;
-import net.certiv.stdt.core.preferences.PrefsKey;
+import net.certiv.stdt.core.preferences.Prefs;
 import net.certiv.stdt.ui.STUI;
 
-public class TabPageBlankLines extends FormatterModifyTabPage {
+public class TabBlankLines extends FormatterModifyTabPage {
 
-	public TabPageBlankLines(IFormatterModifyDialog dialog) {
+	public TabBlankLines(IFormatterModifyDialog dialog) {
 		super(dialog);
 	}
 
@@ -23,8 +23,8 @@ public class TabPageBlankLines extends FormatterModifyTabPage {
 	protected void createOptions(IControlCreationManager manager, Composite parent) {
 		Composite blanks = createOptionGroup(parent, "Blank Lines", 2);
 
-		manager.createNumber(blanks, bind(PrefsKey.FORMATTER_EMPTY_LINES_TO_PRESERVE), "Blank lines to preserve: ");
-		manager.createNumber(blanks, bind(PrefsKey.FORMATTER_EMPTY_LINES_AFTER_TERMINAL),
+		manager.createNumber(blanks, bind(Prefs.FORMATTER_EMPTY_LINES_TO_PRESERVE), "Blank lines to preserve: ");
+		manager.createNumber(blanks, bind(Prefs.FORMATTER_EMPTY_LINES_AFTER_TERMINAL),
 				"Required blank lines after terminal: ");
 	}
 

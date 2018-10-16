@@ -5,7 +5,7 @@ import org.eclipse.swt.graphics.Image;
 
 import net.certiv.dsl.core.model.IDslElement;
 import net.certiv.dsl.ui.editor.OutlineLabelDecorator;
-import net.certiv.stdt.core.parser.ModelData;
+import net.certiv.stdt.core.model.ModelData;
 import net.certiv.stdt.ui.STImages;
 import net.certiv.stdt.ui.STUI;
 
@@ -19,42 +19,34 @@ public class STOutlineLabelDecorator extends OutlineLabelDecorator {
 		return (STImages) STUI.getDefault().getImageProvider();
 	}
 
+	@Override
 	public String decorateText(String text) {
 		return text;
 	}
 
+	@Override
 	public Image decorateImage(Image image) {
 		// create the base image
-		ImageDescriptor baseImage = createBaseImageDescriptor(image);
-		int type = 0;
+		ImageDescriptor desc = createMissingImageDescriptor(image);
 		switch (getElementKind()) {
 			case IDslElement.MODULE:
-				baseImage = getImageProvider().DESC_OBJ_MODULE;
-				type = 1;
+				desc = getImageProvider().DESC_OBJ_MODULE;
 				break;
 			case IDslElement.STATEMENT:
-				baseImage = getImageProvider().DESC_OBJ_STATEMENT;
-				type = 2;
+				desc = getImageProvider().DESC_OBJ_STATEMENT;
 				break;
 			case IDslElement.BEG_BLOCK:
 			case IDslElement.END_BLOCK:
-				baseImage = getImageProvider().DESC_OBJ_BLOCK;
-				type = 3;
+				desc = getImageProvider().DESC_OBJ_BLOCK;
 				break;
 		}
 		// and then apply overlays
 		ModelData customData = (ModelData) getData();
 		if (customData != null) {
 			if (addOverlay(customData.decoration & ModelData.COMBINED)) {
-				baseImage = createOverlayImageDescriptor(baseImage, getImageProvider().DESC_OVR_COMBINED, TOP_RIGHT);
-				type += 100;
+				desc = createOverlayImageDescriptor(desc, getImageProvider().DESC_OVR_COMBINED, TOP_RIGHT);
 			}
 		}
-		Image img = fetchImage(type);
-		if (img == null) {
-			img = baseImage.createImage();
-			storeImage(type, img);
-		}
-		return img;
+		return findImage(desc);
 	}
 }

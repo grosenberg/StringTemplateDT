@@ -19,21 +19,21 @@ public class PrefsInitializer extends DslPrefsInit {
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
 
-		setString(PrefsKey.FORMAT_SPACE_COLON, PrefsKey.AROUND);
-		setString(PrefsKey.FORMAT_SPACE_ASSIGN, PrefsKey.NONE);
-		setString(PrefsKey.FORMAT_SPACE_COMMA, PrefsKey.AFTER);
-		setString(PrefsKey.FORMAT_SPACE_LBRACKET, PrefsKey.BEFORE);
-		setString(PrefsKey.FORMAT_SPACE_RBRACKET, PrefsKey.NONE);
-		setString(PrefsKey.FORMAT_SPACE_PAREN, PrefsKey.BEFORE);
-		setString(PrefsKey.FORMAT_SPACE_TMPL_ASSIGN, PrefsKey.NONE);
+		setString(Prefs.FORMAT_SPACE_COLON, Prefs.AROUND);
+		setString(Prefs.FORMAT_SPACE_ASSIGN, Prefs.NONE);
+		setString(Prefs.FORMAT_SPACE_COMMA, Prefs.AFTER);
+		setString(Prefs.FORMAT_SPACE_LBRACKET, Prefs.BEFORE);
+		setString(Prefs.FORMAT_SPACE_RBRACKET, Prefs.NONE);
+		setString(Prefs.FORMAT_SPACE_PAREN, Prefs.BEFORE);
+		setString(Prefs.FORMAT_SPACE_TMPL_ASSIGN, Prefs.NONE);
 
-		setString(PrefsKey.FORMAT_WRAP_COLON, PrefsKey.NONE);
-		setString(PrefsKey.FORMAT_WRAP_COMMA, PrefsKey.NONE);
-		setString(PrefsKey.FORMAT_WRAP_LBRACKET, PrefsKey.AFTER);
-		setString(PrefsKey.FORMAT_WRAP_RBRACKET, PrefsKey.AFTER);
-		setString(PrefsKey.FORMAT_WRAP_OBRACKET, PrefsKey.NONE);
-		setString(PrefsKey.FORMAT_WRAP_CBRACKET, PrefsKey.NONE);
+		setString(Prefs.FORMAT_WRAP_COLON, Prefs.NONE);
+		setString(Prefs.FORMAT_WRAP_COMMA, Prefs.NONE);
+		setString(Prefs.FORMAT_WRAP_LBRACKET, Prefs.AFTER);
+		setString(Prefs.FORMAT_WRAP_RBRACKET, Prefs.AFTER);
+		setString(Prefs.FORMAT_WRAP_OBRACKET, Prefs.NONE);
+		setString(Prefs.FORMAT_WRAP_CBRACKET, Prefs.NONE);
 
-		setString(PrefsKey.FORMAT_LIST_COMMA, PrefsKey.AFTER);
+		setString(Prefs.FORMAT_LIST_COMMA, Prefs.AFTER);
 	}
 }

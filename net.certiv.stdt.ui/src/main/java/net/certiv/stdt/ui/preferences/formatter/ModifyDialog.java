@@ -6,13 +6,13 @@ import net.certiv.dsl.ui.formatter.IFormatterModifyDialogOwner;
 
 public class ModifyDialog extends FormatterModifyDialog {
 
-	public ModifyDialog(IFormatterModifyDialogOwner dialogOwner, IDslFormatterFactory dslFormatterFactory) {
-		super(dialogOwner, dslFormatterFactory);
+	public ModifyDialog(IFormatterModifyDialogOwner dialogOwner, IDslFormatterFactory factory) {
+		super(dialogOwner, factory);
 	}
 
 	@Override
 	protected void addPages() {
-		addTabPage("General", new TabPageGeneral(this));
-		addTabPage("Blank Lines", new TabPageBlankLines(this));
+		addTabPage("General", new TabGeneral(this, getFormatterFactory()));
+		addTabPage("Blank Lines", new TabBlankLines(this));
 	}
 }

@@ -106,37 +106,37 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="net.certiv.certivtools.prefs.TopLevelPage"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageStringTemplate"
+            class="net.certiv.stdt.ui.preferences.page.GeneralPage"
             id="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
             name="StringTemplate">
       </page>
       <page
             category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageEditor"
+            class="net.certiv.stdt.ui.preferences.page.EditorPage"
             id="net.certiv.stdt.preferences.page.PrefPageEditor"
             name="Editor">
       </page>
       <page
             category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageFolding"
+            class="net.certiv.stdt.ui.preferences.page.FoldingPage"
             id="net.certiv.stdt.ui.preferences.page.PrefPageFolding"
             name="Folding">
       </page>
       <page
             category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageSyntaxColoring"
+            class="net.certiv.stdt.ui.preferences.page.SyntaxColorPage"
             id="net.certiv.stdt.ui.preferences.page.PrefPageSyntaxColoring"
             name="Syntax Coloring">
       </page>
       <page
             category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageCodeTemplates"
+            class="net.certiv.stdt.ui.preferences.page.TemplatesPage"
             id="net.certiv.stdt.ui.preferences.page.PrefPageCodeTemplates"
             name="Templates">
       </page>
       <page
             category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.PrefPageFormatter"
+            class="net.certiv.stdt.ui.preferences.page.FormatterPage"
             id="net.certiv.stdt.ui.preferences.page.PrefPageFormatter"
             name="Formatter">
       </page>

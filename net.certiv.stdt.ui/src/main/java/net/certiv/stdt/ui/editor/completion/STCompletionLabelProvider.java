@@ -13,12 +13,13 @@ public class STCompletionLabelProvider extends CompletionLabelProvider {
 	}
 
 	@Override
-	public ImageDescriptor createImageDescriptor(CompletionProposal proposal) {
-		return null;
+	public String createLabel(CompletionProposal proposal) {
+		return createSimpleLabel(proposal);
 	}
 
 	@Override
-	public String createLabel(CompletionProposal proposal) {
-		return null;
+	public ImageDescriptor createImageDescriptor(CompletionProposal proposal) {
+		return dslUI.getImageProvider().DESC_OBJS_KEYWORD;
+
 	}
 }

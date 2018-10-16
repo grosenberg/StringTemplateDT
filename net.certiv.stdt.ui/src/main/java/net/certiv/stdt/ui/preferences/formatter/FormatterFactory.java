@@ -3,6 +3,7 @@ package net.certiv.stdt.ui.preferences.formatter;
 import java.net.URL;
 
 import net.certiv.dsl.core.DslCore;
+import net.certiv.dsl.core.formatter.IDslCodeFormatter;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.formatter.DslFormatterFactory;
 import net.certiv.dsl.ui.formatter.IFormatterModifyDialog;
@@ -17,15 +18,13 @@ public class FormatterFactory extends DslFormatterFactory {
 	}
 
 	@Override
-	public String[] getFormatterKeys() {
-		String[] keys = new String[getPrefsManager().getFormatterKeys().size()];
-		getPrefsManager().getFormatterKeys().toArray(keys);
-		return keys;
+	public DslUI getDslUI() {
+		return STUI.getDefault();
 	}
 
 	@Override
-	public URL getPreviewContent() {
-		return getClass().getResource("FormatPreview.stg");
+	public DslCore getDslCore() {
+		return STCore.getDefault();
 	}
 
 	@Override
@@ -34,12 +33,12 @@ public class FormatterFactory extends DslFormatterFactory {
 	}
 
 	@Override
-	public DslUI getDslUI() {
-		return STUI.getDefault();
+	public URL getPreviewContent() {
+		return getClass().getResource("FormatPreview.stg");
 	}
 
 	@Override
-	public DslCore getDslCore() {
-		return STCore.getDefault();
+	public IDslCodeFormatter createFormatter() {
+		return null;
 	}
 }

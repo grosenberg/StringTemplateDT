@@ -10,7 +10,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.Token;
 
-import net.certiv.dsl.ui.editor.text.AbstractRuleBasedPartitionScanner;
+import net.certiv.dsl.ui.editor.scanners.AbstractRuleBasedPartitionScanner;
 
 public class PartitionScanner extends AbstractRuleBasedPartitionScanner {
 

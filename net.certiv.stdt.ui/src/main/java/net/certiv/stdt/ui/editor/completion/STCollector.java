@@ -12,16 +12,16 @@ import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.core.model.IStatement;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.completion.CompletionLabelProvider;
-import net.certiv.dsl.ui.editor.text.completion.DslCollector;
 import net.certiv.dsl.ui.editor.text.completion.DslCompletionProposal;
+import net.certiv.dsl.ui.editor.text.completion.DslCompletionProposalCollector;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
 import net.certiv.stdt.ui.editor.text.ScannerKeyword;
 
-public class STCollector extends DslCollector {
+public class STCollector extends DslCompletionProposalCollector {
 
-	public STCollector(ICodeUnit cu) {
-		super(cu);
+	public STCollector(ICodeUnit unit) {
+		super(unit);
 	}
 
 	@Override
@@ -35,19 +35,18 @@ public class STCollector extends DslCollector {
 	}
 
 	@Override
-	protected CompletionLabelProvider createCompletionProposalLabelProvider() {
+	protected CompletionLabelProvider createProposalLabelProvider() {
 		return new STCompletionLabelProvider();
 	}
 
 	@Override
-	protected DslCompletionProposal createDslCompletionProposal(String completion, int offset, int length, Image image,
+	protected DslCompletionProposal createDslProposal(String completion, int offset, int length, Image image,
 			String label, int relevance) {
-		return createDslCompletionProposal(completion, offset, length, image, new StyledString(label), relevance,
-				false);
+		return createDslProposal(completion, offset, length, image, new StyledString(label), relevance, false);
 	}
 
 	@Override
-	protected DslCompletionProposal createDslCompletionProposal(String completion, int offset, int length, Image image,
+	protected DslCompletionProposal createDslProposal(String completion, int offset, int length, Image image,
 			StyledString label, int relevance, boolean inDoc) {
 		return new STCompletionProposal(completion, offset, length, image, label, relevance, inDoc);
 	}
@@ -57,13 +56,8 @@ public class STCollector extends DslCollector {
 		return VAR_TRIGGER;
 	}
 
-	/**
-	 * @param offset invocation offset
-	 */
 	@Override
 	public void prepareProposals(ICodeUnit unit, int offset) throws DslModelException {
-
-		if (!parseValid()) return;
 
 		// 1) handle lexer and parser rule names: captured as a list of tokens
 		Set<IStatement> rules = getDslCore().getModelManager().getCodeAssistElements(unit);

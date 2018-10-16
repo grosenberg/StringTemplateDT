@@ -9,7 +9,7 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import net.certiv.dsl.core.IColorManager;
+import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
 
 public class STSimpleSourceViewerConfiguration extends STSourceViewerConfiguration {

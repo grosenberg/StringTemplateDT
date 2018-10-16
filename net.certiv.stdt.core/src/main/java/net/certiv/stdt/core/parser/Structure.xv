@@ -2,12 +2,12 @@ xvisitor grammar Structure ;
 
 options {
 	parserClass = STGParser ;
-	superClass  = StructureAdaptor ;
+	superClass  = StructureBuilder ;
 }
 
 @header {
 	package net.certiv.stdt.core.parser.gen;
-	import net.certiv.stdt.core.parser.StructureAdaptor;
+	import net.certiv.stdt.core.parser.StructureBuilder;
 }
 
 structure

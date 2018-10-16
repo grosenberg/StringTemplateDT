@@ -24,3 +24,4 @@ Require-Bundle: net.certiv.stdt.core;bundle-version="4.1.0",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.9.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.ui.forms.widgets

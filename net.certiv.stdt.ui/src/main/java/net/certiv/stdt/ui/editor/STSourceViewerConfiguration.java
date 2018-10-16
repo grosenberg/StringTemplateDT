@@ -13,14 +13,14 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.IColorManager;
+import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
 import net.certiv.dsl.core.util.Strings;
-import net.certiv.dsl.core.util.TabStyle;
+import net.certiv.dsl.core.util.eclipse.TabStyle;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.DoubleClickStrategy;
-import net.certiv.dsl.ui.editor.text.DslPresentationReconciler;
-import net.certiv.dsl.ui.editor.text.DslSourceViewerConfiguration;
+import net.certiv.dsl.ui.editor.DslPresentationReconciler;
+import net.certiv.dsl.ui.editor.DslSourceViewerConfiguration;
 import net.certiv.dsl.ui.editor.text.completion.DslCompletionProcessor;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
@@ -91,7 +91,7 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	@Override
 	public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
 		if (STCore.getDefault().getPrefsManager().getTabStyle() == TabStyle.SPACES) {
-			return new String[] { Strings.getNSpaces(STCore.getDefault().getPrefsManager().getIndentationSize()) };
+			return new String[] { Strings.dup(STCore.getDefault().getPrefsManager().getIndentationSize(), " ") };
 		} else {
 			return new String[] { "\t" };
 		}

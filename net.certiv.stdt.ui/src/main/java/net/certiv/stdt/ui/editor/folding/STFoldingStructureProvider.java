@@ -25,7 +25,7 @@ public class STFoldingStructureProvider extends AbstractDslFoldingStructureProvi
 
 	@Override
 	protected String getPartitioning() {
-		return Partitions.ST_PARTITIONING;
+		return Partitions.PARTITIONING;
 	}
 
 	@Override

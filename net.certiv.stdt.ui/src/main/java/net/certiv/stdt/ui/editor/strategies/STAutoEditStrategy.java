@@ -2,11 +2,11 @@ package net.certiv.stdt.ui.editor.strategies;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.ui.DslUI;
-import net.certiv.dsl.ui.editor.strategies.AutoEditStrategy;
+import net.certiv.dsl.ui.editor.text.AbstractAutoEditStrategy;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
 
-public class STAutoEditStrategy extends AutoEditStrategy {
+public class STAutoEditStrategy extends AbstractAutoEditStrategy {
 
 	public STAutoEditStrategy(String partitioning) {
 		super(partitioning);

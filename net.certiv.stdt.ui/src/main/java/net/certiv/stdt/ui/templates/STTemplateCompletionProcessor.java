@@ -1,10 +1,5 @@
 package net.certiv.stdt.ui.templates;
 
-import net.certiv.dsl.ui.editor.text.completion.DslContentAssistInvocationContext;
-import net.certiv.dsl.ui.templates.DslTemplateCompletionProcessor;
-import net.certiv.stdt.ui.STUI;
-import net.certiv.stdt.ui.editor.Partitions;
-
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.IDocument;
@@ -15,6 +10,12 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
+
+import net.certiv.dsl.ui.editor.text.completion.DslContentAssistInvocationContext;
+import net.certiv.dsl.ui.editor.text.completion.tmpl.DslTemplateCompletionProcessor;
+import net.certiv.dsl.ui.templates.CompletionManager;
+import net.certiv.stdt.ui.STUI;
+import net.certiv.stdt.ui.editor.Partitions;
 
 public class STTemplateCompletionProcessor extends DslTemplateCompletionProcessor {
 
@@ -32,11 +33,6 @@ public class STTemplateCompletionProcessor extends DslTemplateCompletionProcesso
 	@Override
 	protected char[] getIgnore() {
 		return IGNORE;
-	}
-
-	@Override
-	protected STTemplateAccess getTemplateAccess() {
-		return STTemplateAccess.getInstance();
 	}
 
 	// NOTE: this handles empty prefixes
@@ -59,22 +55,23 @@ public class STTemplateCompletionProcessor extends DslTemplateCompletionProcesso
 		IDocumentExtension3 doc = (IDocumentExtension3) viewer.getDocument();
 		ITypedRegion typedRegion = null;
 		try {
-			typedRegion = doc.getPartition(Partitions.ST_PARTITIONING, region.getOffset(), true);
-		} catch (BadLocationException e) {
-			e.printStackTrace();
-		} catch (BadPartitioningException e) {
+			typedRegion = doc.getPartition(Partitions.PARTITIONING, region.getOffset(), true);
+		} catch (BadLocationException | BadPartitioningException e) {
 			e.printStackTrace();
 		}
 		if (typedRegion == null) return null;
 		String type = typedRegion.getType();
 
 		if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
-			return getTemplateAccess().getContextTypeRegistry()
+			return getCompletionMgr().getTemplateContextTypeRegistry()
 					.getContextType(STTemplateContextType.ST_CONTEXT_TYPE_ID);
 		}
 
-		// return null;
 		return super.getContextType(viewer, region);
+	}
+
+	private CompletionManager getCompletionMgr() {
+		return STUI.getDefault().getCompletionMgr();
 	}
 
 	// private boolean isValidPartition(String type) {
@@ -87,7 +84,7 @@ public class STTemplateCompletionProcessor extends DslTemplateCompletionProcesso
 	@Override
 	protected Template[] getTemplates(String contextTypeId) {
 		if (contextTypeId.equals(STTemplateContextType.ST_CONTEXT_TYPE_ID)) {
-			return getTemplateAccess().getTemplateStore().getTemplates(contextTypeId);
+			return getCompletionMgr().getTemplates();
 		}
 		return new Template[0];
 	}

@@ -25,94 +25,95 @@
  *	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  *	THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
-/*	Antlr grammar for StringTemplate v4. */
- 
-lexer grammar STGLexer;
+
+/*
+ * Antlr grammar for StringTemplate v4.
+ */
+lexer grammar STGLexer ;
 
 @header {
-	package net.certiv.adept.lang.st.parser.gen;
+	package net.certiv.stdt.core.parser.gen;
 }
-
 
 // ------------------------------------------------------------------------------
 // mode default
 
-DOC_COMMENT			: DocComment		-> channel(HIDDEN)	;
-BLOCK_COMMENT		: BlockComment		-> channel(HIDDEN)	;
-LINE_COMMENT		: LineCommentExt	-> channel(HIDDEN)	;
+DOC_COMMENT	  : DocComment	   -> channel(HIDDEN) ;
+BLOCK_COMMENT : BlockComment   -> channel(HIDDEN) ;
+LINE_COMMENT  : LineCommentExt -> channel(HIDDEN) ;
 
-TMPL_COMMENT		: LBang .? RBang	-> channel(HIDDEN)	;
+TMPL_COMMENT : LBang .? RBang -> channel(HIDDEN) ;
+HORZ_WS	:	Hws+ -> channel(HIDDEN)	;
+VERT_WS	:	Vws+ -> channel(HIDDEN)	;
 
-HORZ_WS				: Hws+				-> channel(HIDDEN)	;
-VERT_WS				: Vws+				-> channel(HIDDEN)	;
-
-STRING				: String				;
-BIGSTRING 			: LDAngle .*? RDAngle	;
-BIGSTRING_NO_NL		: LPct .*? RPct			;
-ANON_TEMPLATE		: LBrace .*? RBrace		;
-
+STRING			: String			  ;
+BIGSTRING		: LDAngle .*? RDAngle ;
+BIGSTRING_NO_NL	: LPct .*? RPct		  ;
+ANON_TEMPLATE	: LBrace .*? RBrace
+									  ;
 
 // -----------------------------------
 // Symbols
 
-ASSIGN		: Assign		;
-EQUAL		: Equal			;
-DOT			: Dot			;
-COMMA		: Comma			;
-SEMI		: Semi			;
-COLON		: Colon			;
-LPAREN		: LParen		;
-RPAREN		: RParen		;
-LBRACK		: LBrack		;
-RBRACK		: RBrack		;
-AT			: At			;
-TRUE		: True			;
-FALSE		: False			;
+ASSIGN : Assign	;
+EQUAL  : Equal	;
+DOT	   : Dot	;
+COMMA  : Comma	;
+SEMI   : Semi	;
+COLON  : Colon	;
+LPAREN : LParen	;
+RPAREN : RParen	;
+LBRACK : LBrack	;
+RBRACK : RBrack	;
+AT	   : At		;
+TRUE   : True	;
+FALSE  : False
+				;
 
 // -----------------------------------
 // Key words
 
-GROUP		: 'group'		;
-DELIMITERS	: 'delimiters'	;
-IMPORT		: 'import'		;
+GROUP	   : 'group'	  ;
+DELIMITERS : 'delimiters' ;
+IMPORT	   : 'import'
+						  ;
 
 // -----------------------------------
 // Identifiers
 
-ID  : NameStartChar NameChar*	;
-
-
+ID : NameStartChar NameChar*
+	;
 
 // ===================================
 // Lexer fragments
 
 // -----------------------------------
+
 // Grammar specific fragments
 
-fragment Assign		: '::='		;
-fragment LBang		: '<!'		;
-fragment RBang		: '!>'		;
-fragment LPct		: '<%'		;
-fragment RPct		: '%>'		;
-fragment LDAngle	: LShift	;
-fragment RDAngle	: RShift	;
+fragment Assign	 : '::='  ;
+fragment LBang	 : '<!'	  ;
+fragment RBang	 : '!>'	  ;
+fragment LPct	 : '<%'	  ;
+fragment RPct	 : '%>'	  ;
+fragment LDAngle : LShift ;
+fragment RDAngle : RShift
+						  ;
 
 // -----------------------------------
+
 // Whitespace & Comments
-
-fragment Hws			: [ \t] ;
-fragment Vws			: [\r\n\f] ;
-
-fragment DocComment		: '/**' .*? ('*/' | EOF) ;
-fragment BlockComment	: '/*'  .*? ('*/' | EOF) ;
-fragment LineComment	: '//' ~[\r\n]*			 ;
-fragment LineCommentExt	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )*	;
-
+fragment Hws : [ \t]	;
+fragment Vws : [\r\n\f] ;
+fragment DocComment		: '/**' .*?		('*/' | EOF	) ;
+fragment BlockComment	: '/*'  .*?		('*/' | EOF	) ;
+fragment LineComment	: '//' ~[\r\n]*				  ;
+fragment LineCommentExt	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )*
+													  ;
 
 // -----------------------------------
-// Escapes
 
+// Escapes
 fragment EscSeq
 	:	Esc
 		( [btnfr"'\\]	// standard escaped character
@@ -123,21 +124,20 @@ fragment EscSeq
 	;
 
 fragment UnicodeEsc
-	:	'u' (HexDigit (HexDigit (HexDigit HexDigit?)?)?)?
+	:	'u' (HexDigit (HexDigit (HexDigit HexDigit?	)? )? )?
 	;
 
-fragment HexDigit	: [0-9a-fA-F]	;
-
+fragment HexDigit : [0-9a-fA-F] ;
 
 // -----------------------------------
+
 // Literals
-
-fragment String		: DQuote ( EscSeq | ~["\r\n\\] )* DQuote	;
-
+fragment String	: DQuote ( EscSeq | ~["\r\n\\] )* DQuote
+	;
 
 // -----------------------------------
-// Character ranges
 
+// Character ranges
 fragment NameChar
 	:	NameStartChar
 	|	'0'..'9'
@@ -163,33 +163,33 @@ fragment NameStartChar
 	|	'\uFDF0'..'\uFFFD'
 	;
 
-
 // -----------------------------------
+
 // Types
 
-fragment True		 	: 'true'	;
-fragment False			: 'false'	;
-
+fragment True  : 'true' ;
+fragment False : 'false'
+						;
 
 // -----------------------------------
+
 // Symbols
 
-fragment Esc			: '\\'	;
-fragment At				: '@'	;
-fragment Colon			: ':'	;
-fragment Semi			: ';'	;
-fragment Dot			: '.'	;
-fragment Comma			: ','	;
-fragment Equal			: '='	;
-fragment DQuote			: '"'	;
-fragment Underscore		: '_'	;
-
-fragment LParen			: '('	;
-fragment RParen			: ')'	;
-fragment LBrace			: '{'	;
-fragment RBrace			: '}'	;
-fragment LBrack			: '['	;
-fragment RBrack			: ']'	;
-fragment LShift			: '<<'	;
-fragment RShift			: '>>'	;
+fragment Esc		: '\\' ;
+fragment At			: '@'  ;
+fragment Colon		: ':'  ;
+fragment Semi		: ';'  ;
+fragment Dot		: '.'  ;
+fragment Comma		: ','  ;
+fragment Equal		: '='  ;
+fragment DQuote		: '"'  ;
+fragment Underscore	: '_'  ;
+fragment LParen	: '('  ;
+fragment RParen	: ')'  ;
+fragment LBrace	: '{'  ;
+fragment RBrace	: '}'  ;
+fragment LBrack	: '['  ;
+fragment RBrack	: ']'  ;
+fragment LShift	: '<<' ;
+fragment RShift	: '>>' ;
 

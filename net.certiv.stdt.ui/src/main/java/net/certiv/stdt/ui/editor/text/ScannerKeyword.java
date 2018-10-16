@@ -8,11 +8,11 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
-import net.certiv.dsl.ui.editor.text.AbstractBufferedRuleBasedScanner;
+import net.certiv.dsl.ui.editor.scanners.AbstractBufferedRuleBasedScanner;
 import net.certiv.dsl.ui.editor.text.rules.CharSequenceRule;
 import net.certiv.dsl.ui.editor.text.rules.CharsRule;
 import net.certiv.dsl.ui.editor.text.rules.DslWordRule;
-import net.certiv.stdt.core.preferences.PrefsKey;
+import net.certiv.stdt.core.preferences.Prefs;
 
 public class ScannerKeyword extends AbstractBufferedRuleBasedScanner {
 
@@ -35,14 +35,14 @@ public class ScannerKeyword extends AbstractBufferedRuleBasedScanner {
 	@Override
 	protected String[] getTokenProperties() {
 		if (tokenProperties == null) {
-			tokenProperties = new String[] { bind(PrefsKey.EDITOR_KEYWORDS_COLOR) };
+			tokenProperties = new String[] { bind(Prefs.EDITOR_KEYWORDS_COLOR) };
 		}
 		return tokenProperties;
 	}
 
 	@Override
 	protected List<IRule> createRules() {
-		IToken keyToken = getToken(bind(PrefsKey.EDITOR_KEYWORDS_COLOR));
+		IToken keyToken = getToken(bind(Prefs.EDITOR_KEYWORDS_COLOR));
 
 		List<IRule> rules = new ArrayList<IRule>();
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));

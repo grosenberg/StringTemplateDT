@@ -3,36 +3,37 @@ package net.certiv.stdt.ui.preferences.page;
 import org.eclipse.jface.text.IDocument;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.IColorManager;
+import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.DslPrefsManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
-import net.certiv.dsl.ui.templates.DslTemplateAccess;
+import net.certiv.dsl.ui.templates.CompletionManager;
 import net.certiv.dsl.ui.templates.DslTemplatePreferencePage;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
 import net.certiv.stdt.ui.editor.Partitions;
 import net.certiv.stdt.ui.editor.STSimpleSourceViewerConfiguration;
 import net.certiv.stdt.ui.editor.STSourceViewerConfiguration;
-import net.certiv.stdt.ui.templates.STTemplateAccess;
 
-public class PrefPageCodeTemplates extends DslTemplatePreferencePage {
+public class TemplatesPage extends DslTemplatePreferencePage {
 
-	public PrefPageCodeTemplates() {
+	public TemplatesPage() {
 		super();
 		DslPrefsManager delta = STCore.getDefault().getPrefsManager();
 		delta.setDefaultProject(null);
 		setPreferenceStore(delta);
 	}
 
+	@Override
 	protected STSourceViewerConfiguration createSourceViewerConfiguration() {
 		return new STSimpleSourceViewerConfiguration(getColorManager(), (IDslPrefsManager) getPreferenceStore(), null,
-				Partitions.ST_PARTITIONING, false);
+				Partitions.PARTITIONING, false);
 	}
 
+	@Override
 	protected void setDocumentPartitioner(IDocument document) {
-		getTextTools().setupDocumentPartitioner(document, Partitions.ST_PARTITIONING);
+		getTextTools().setupDocumentPartitioner(document, Partitions.PARTITIONING);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class PrefPageCodeTemplates extends DslTemplatePreferencePage {
 	}
 
 	@Override
-	protected DslTemplateAccess getTemplateAccess() {
-		return STTemplateAccess.getInstance();
+	protected CompletionManager getCompletionMgr() {
+		return STUI.getDefault().getCompletionMgr();
 	}
 }

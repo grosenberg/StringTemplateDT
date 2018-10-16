@@ -1,43 +1,40 @@
 package net.certiv.stdt.ui.editor.completion;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
-
-import net.certiv.dsl.ui.editor.text.completion.ContentAssistInvocationContext;
-import net.certiv.dsl.ui.editor.text.completion.DslCollector;
-import net.certiv.dsl.ui.editor.text.completion.DslCompletionProposalComputer;
 import net.certiv.dsl.ui.editor.text.completion.DslContentAssistInvocationContext;
-import net.certiv.stdt.ui.templates.STTemplateCompletionProcessor;
+import net.certiv.dsl.ui.editor.text.completion.tmpl.DslTemplateCompletionProposalComputer;
+import net.certiv.dsl.ui.editor.text.completion.tmpl.DslTemplateEngine;
 
-public class STTemplateCompletionComputer extends DslCompletionProposalComputer {
-
-	@Override
-	protected DslCollector createCollector(DslContentAssistInvocationContext context) {
-		return new STCollector(context.getSourceModule());
-	}
+public class STTemplateCompletionComputer extends DslTemplateCompletionProposalComputer {
 
 	@Override
-	protected TemplateCompletionProcessor createTemplateProposalComputer(DslContentAssistInvocationContext context) {
-		return new STTemplateCompletionProcessor(context);
+	protected DslTemplateEngine computeCompletionEngine(DslContentAssistInvocationContext context) {
+		return null;
 	}
 
-	// Completion proposals
-	@Override
-	public List<ICompletionProposal> computeCompletionProposals(ContentAssistInvocationContext context,
-			IProgressMonitor monitor) {
+	// @Override
+	// protected DslCollector createCollector(DslContentAssistInvocationContext context) {
+	// return new STCollector(context.getSourceModule());
+	// }
 
-		if (context instanceof DslContentAssistInvocationContext) {
-			DslContentAssistInvocationContext dslContext = (DslContentAssistInvocationContext) context;
-			int offset = dslContext.getInvocationOffset();
-			List<ICompletionProposal> proposals = new ArrayList<>();
-			proposals.addAll(computeTemplateCompletionProposals(offset, dslContext, monitor));
-			return proposals;
-		}
-		return Collections.emptyList();
-	}
+	// @Override
+	// protected TemplateCompletionProcessor
+	// createTemplateProposalComputer(DslContentAssistInvocationContext context) {
+	// return new STTemplateCompletionProcessor(context);
+	// }
+	//
+	// // Completion proposals
+	// @Override
+	// public List<ICompletionProposal> computeCompletionProposals(ContentAssistInvocationContext
+	// context,
+	// IProgressMonitor monitor) {
+	//
+	// if (context instanceof DslContentAssistInvocationContext) {
+	// DslContentAssistInvocationContext dslContext = (DslContentAssistInvocationContext) context;
+	// int offset = dslContext.getInvocationOffset();
+	// List<ICompletionProposal> proposals = new ArrayList<>();
+	// proposals.addAll(computeTemplateCompletionProposals(offset, dslContext, monitor));
+	// return proposals;
+	// }
+	// return Collections.emptyList();
+	// }
 }
