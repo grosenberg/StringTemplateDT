@@ -3,6 +3,7 @@ package net.certiv.stdt.core;
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
+import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.core.parser.DslSourceParser;
 import net.certiv.dsl.core.util.Log;
 import net.certiv.dsl.core.util.Log.LogLevel;
@@ -11,6 +12,7 @@ import net.certiv.stdt.core.parser.STSourceParser;
 public class STCore extends DslCore {
 
 	private static final String[] EXTENSIONS = new String[] { "st", "stg" };
+	public static final String DSL_NAME = "stg";
 
 	public static STCore plugin;
 
@@ -51,12 +53,10 @@ public class STCore extends DslCore {
 	}
 
 	@Override
-	public DslSourceParser createSourceParser(String type) {
-		return new STSourceParser();
-	}
-
-	@Override
-	public String getProblemMakerId(String type) {
-		return getPluginId() + String.format(".%s_marker", type);
+	public DslSourceParser createSourceParser(ICodeUnit unit, String contentType) {
+		if (DSL_NAME.equals(contentType) || getContentTypeId().equals(contentType)) {
+			return new STSourceParser(unit.getParseRecord());
+		}
+		return null;
 	}
 }

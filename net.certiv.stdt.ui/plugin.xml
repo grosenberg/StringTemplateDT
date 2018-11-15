@@ -305,7 +305,7 @@
             contributesToHeader="false"
             highlightPreferenceKey="occurrenceHighlighting"
             highlightPreferenceValue="true"
-            icon="$nl$/icons/full/obj16/searchm_obj.gif"
+            icon="$nl$/icons/full/obj16/searchm_obj.png"
             includeOnPreferencePage="true"
             isGoToNextNavigationTarget="false"
             isGoToNextNavigationTargetKey="isOccurrenceGoToNextNavigationTarget"
@@ -349,7 +349,7 @@
         name="Template Proposals"
         point="net.certiv.dsl.ui.completionProposalComputer">
      <proposalCategory
-           icon="icons/elcl16/templateprop_co.gif"></proposalCategory>
+           icon="icons/elcl16/templateprop_co.png"></proposalCategory>
   </extension>
   <extension
         id="TemplateCompletionProposalComputer"
@@ -375,7 +375,7 @@
                id="net.certiv.stdt.ui.toolbars.dslToolbar">
             <command
                   commandId="net.certiv.stdt.ui.edit.text.toggleMarkOccurrences"
-                  icon="icons/etool16/mark_occurrences.gif"
+                  icon="icons/etool16/mark_occurrences.png"
                   style="toggle"
                   tooltip="Toggle Mark Occcurrences">
 	            <visibleWhen
@@ -387,7 +387,7 @@
             </command>
             <command
                   commandId="net.certiv.stdt.ui.build"
-                  icon="icons/etool16/build_exec.gif"
+                  icon="icons/etool16/build_exec.png"
                   style="push"
                   tooltip="Build StringTemplates">
 	            <visibleWhen

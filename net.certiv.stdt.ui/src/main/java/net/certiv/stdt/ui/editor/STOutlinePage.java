@@ -1,11 +1,11 @@
 package net.certiv.stdt.ui.editor;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.ILabelDecorator;
+
 import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslOutlinePage;
 import net.certiv.stdt.ui.STUI;
-
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ILabelDecorator;
 
 public class STOutlinePage extends DslOutlinePage {
 

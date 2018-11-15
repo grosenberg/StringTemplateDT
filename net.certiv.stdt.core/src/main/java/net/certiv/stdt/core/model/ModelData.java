@@ -2,10 +2,10 @@ package net.certiv.stdt.core.model;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import net.certiv.dsl.core.model.IDescriptionData;
 import net.certiv.dsl.core.model.IStatement.Form;
 import net.certiv.dsl.core.model.IStatement.Realm;
 import net.certiv.dsl.core.model.IStatement.Type;
+import net.certiv.dsl.core.model.builder.IDescriptionData;
 
 public class ModelData implements IDescriptionData {
 

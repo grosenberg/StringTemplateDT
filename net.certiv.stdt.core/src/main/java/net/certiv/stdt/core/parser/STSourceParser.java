@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.model.builder.DslModelMaker;
+import net.certiv.dsl.core.parser.DslParseRecord;
 import net.certiv.dsl.core.parser.DslSourceParser;
 import net.certiv.dsl.core.util.Log;
 import net.certiv.dsl.core.util.Log.LogLevel;
@@ -16,10 +17,10 @@ import net.certiv.stdt.core.parser.gen.StructureVisitor;
 
 public class STSourceParser extends DslSourceParser {
 
-	// private static final STGTokenFactory Factory = new STGTokenFactory();
+	private static final STTokenFactory TokenFactory = new STTokenFactory();
 
-	public STSourceParser() {
-		super();
+	public STSourceParser(DslParseRecord record) {
+		super(record);
 		Log.setLevel(this, LogLevel.Info);
 	}
 
@@ -32,13 +33,13 @@ public class STSourceParser extends DslSourceParser {
 	public void parse() {
 		record.cs = CharStreams.fromString(record.doc.get());
 		STGLexer lexer = new STGLexer(record.cs);
-		// lexer.setTokenFactory(Factory);
+		lexer.setTokenFactory(TokenFactory);
 		lexer.removeErrorListeners();
 		lexer.addErrorListener(getDslErrorListener());
 
 		record.ts = new CommonTokenStream(lexer);
 		record.parser = new STParser(record.ts);
-		// record.parser.setTokenFactory(Factory);
+		record.parser.setTokenFactory(TokenFactory);
 		record.parser.removeErrorListeners();
 		record.parser.addErrorListener(getDslErrorListener());
 		record.tree = ((STGParser) record.parser).group();
@@ -56,10 +57,7 @@ public class STSourceParser extends DslSourceParser {
 	}
 
 	@Override
-	public void build() {}
-
-	@Override
 	public boolean modelContributor() {
-		return false;
+		return true;
 	}
 }

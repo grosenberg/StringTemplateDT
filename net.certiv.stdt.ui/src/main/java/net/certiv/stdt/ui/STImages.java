@@ -11,11 +11,11 @@ public class STImages extends DslImages {
 	private static final Bundle locBundle = STUI.getDefault().getBundle();
 	private static final String locPrefix = locBundle.getSymbolicName() + '.';
 
-	public final ImageDescriptor DESC_OBJ_MODULE = create(locBundle, OBJ, locPrefix + "module_blue.gif");
-	public final ImageDescriptor DESC_OBJ_STATEMENT = create(locBundle, OBJ, locPrefix + "statement.gif");
-	public final ImageDescriptor DESC_OBJ_BLOCK = create(locBundle, OBJ, locPrefix + "block.gif");
+	public final ImageDescriptor DESC_OBJ_MODULE = create(locBundle, OBJ, locPrefix + "module_blue.png");
+	public final ImageDescriptor DESC_OBJ_STATEMENT = create(locBundle, OBJ, locPrefix + "statement.png");
+	public final ImageDescriptor DESC_OBJ_BLOCK = create(locBundle, OBJ, locPrefix + "block.png");
 
-	public final ImageDescriptor DESC_OVR_COMBINED = create(locBundle, OVR, locPrefix + "combined_ovr.gif");
+	public final ImageDescriptor DESC_OVR_COMBINED = create(locBundle, OVR, locPrefix + "combined_ovr.png");
 
 	public STImages() {
 		super();

@@ -158,7 +158,6 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 			case Partitions.COMMENT_ML:
 				strategy = new STAutoEditDocStrategy(partitioning);
 				break;
-			case Partitions.COMMENT_SL:
 			default:
 				strategy = new STAutoEditStrategy(partitioning);
 		}
