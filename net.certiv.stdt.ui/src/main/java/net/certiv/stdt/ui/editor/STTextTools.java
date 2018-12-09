@@ -22,18 +22,18 @@ public class STTextTools extends DslTextTools {
 	@Override
 	public void createAutoClosePairs() {
 		for (String contentType : Partitions.getAllContentTypes()) {
-			addAutoClosePair(contentType, '{', '}');
-			addAutoClosePair(contentType, '(', ')');
-			addAutoClosePair(contentType, '[', ']');
-			addAutoClosePair(contentType, '<', '>');
-			addAutoClosePair(contentType, '$', '$');
-			addAutoClosePair(contentType, '%', '%');
+			addAutoClosePair(contentType, "{", "}");
+			addAutoClosePair(contentType, "(", ")");
+			addAutoClosePair(contentType, "[", "]");
+			addAutoClosePair(contentType, "<", ">");
+			addAutoClosePair(contentType, "$", "$");
+			addAutoClosePair(contentType, "%", "%");
 		}
 	}
 
 	@Override
 	public void createAutoIndentPairs() {
-		// addAutoIndentPair(IDocument.DEFAULT_CONTENT_TYPE, '{', '}');
+		// addAutoIndentPair(IDocument.DEFAULT_CONTENT_TYPE, "{", "}");
 	}
 
 	@Override

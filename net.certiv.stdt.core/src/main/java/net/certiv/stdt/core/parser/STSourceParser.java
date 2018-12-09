@@ -4,15 +4,14 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import net.certiv.dsl.core.DslCore;
+import net.certiv.dsl.core.log.Log;
+import net.certiv.dsl.core.log.Log.LogLevel;
 import net.certiv.dsl.core.model.builder.DslModelMaker;
 import net.certiv.dsl.core.parser.DslParseRecord;
 import net.certiv.dsl.core.parser.DslSourceParser;
-import net.certiv.dsl.core.util.Log;
-import net.certiv.dsl.core.util.Log.LogLevel;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.core.parser.gen.STGLexer;
 import net.certiv.stdt.core.parser.gen.STGParser;
-import net.certiv.stdt.core.parser.gen.STParser;
 import net.certiv.stdt.core.parser.gen.StructureVisitor;
 
 public class STSourceParser extends DslSourceParser {
@@ -38,7 +37,7 @@ public class STSourceParser extends DslSourceParser {
 		lexer.addErrorListener(getDslErrorListener());
 
 		record.ts = new CommonTokenStream(lexer);
-		record.parser = new STParser(record.ts);
+		record.parser = new STGParser(record.ts);
 		record.parser.setTokenFactory(TokenFactory);
 		record.parser.removeErrorListeners();
 		record.parser.addErrorListener(getDslErrorListener());

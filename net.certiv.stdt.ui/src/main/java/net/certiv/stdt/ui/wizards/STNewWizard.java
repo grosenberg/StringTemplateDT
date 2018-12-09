@@ -18,6 +18,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.util.CoreUtil;
+import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.wizards.DslBaseWizard;
 import net.certiv.stdt.core.STCore;
@@ -54,9 +55,11 @@ public class STNewWizard extends DslBaseWizard {
 
 	@Override
 	public ImageDescriptor getPageImageDescriptor() {
-		return getDslUI().getImageProvider().DESC_WIZBAN_NEW_FILE;
+		DslImageManager imgMgr = getDslUI().getImageManager();
+		return imgMgr.getDescriptor(imgMgr.IMG_WIZBAN_NEW_FILE);
 	}
 
+	@Override
 	public void addPages() {
 		page = new STNewWizardPage(getSelection());
 		page.setTitle("Template");
@@ -64,12 +67,14 @@ public class STNewWizard extends DslBaseWizard {
 		addPage(page);
 	}
 
+	@Override
 	public boolean performFinish() {
 		final String filename = page.getFileName();
 		final IPath container = page.getContainerFullPath();
 
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 
+			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					doFinish(filename, container, monitor);

@@ -3,9 +3,9 @@ package net.certiv.stdt.ui;
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.util.Log;
-import net.certiv.dsl.core.util.Log.LogLevel;
-import net.certiv.dsl.ui.DslImages;
+import net.certiv.dsl.core.log.Log;
+import net.certiv.dsl.core.log.Log.LogLevel;
+import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
 import net.certiv.stdt.core.STCore;
@@ -20,7 +20,7 @@ public class STUI extends DslUI {
 
 	private static STUI plugin;
 	private DslTextTools textTools;
-	private DslImages imageProvider;
+	private DslImageManager imgMgr;
 
 	public STUI() {
 		super();
@@ -72,11 +72,11 @@ public class STUI extends DslUI {
 	}
 
 	@Override
-	public DslImages getImageProvider() {
-		if (imageProvider == null) {
-			imageProvider = new STImages();
+	public DslImageManager getImageManager() {
+		if (imgMgr == null) {
+			imgMgr = new STImageManager();
 		}
-		return imageProvider;
+		return imgMgr;
 	}
 
 	@Override

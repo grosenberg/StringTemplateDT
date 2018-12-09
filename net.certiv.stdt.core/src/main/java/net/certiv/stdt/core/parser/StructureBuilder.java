@@ -1,14 +1,13 @@
 package net.certiv.stdt.core.parser;
 
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
 import net.certiv.antlr.runtime.xvisitor.Processor;
-import net.certiv.dsl.core.model.IDslElement;
+import net.certiv.dsl.core.model.ModuleStmt;
 import net.certiv.dsl.core.model.builder.DslModelMaker;
+import net.certiv.dsl.core.util.antlr.AntlrUtil;
 import net.certiv.stdt.core.model.ModelData;
 import net.certiv.stdt.core.model.ModelType;
 import net.certiv.stdt.core.parser.gen.STGParser.DelimitersContext;
@@ -34,15 +33,18 @@ public abstract class StructureBuilder extends Processor {
 		GroupContext ctx = (GroupContext) lastPathNode();
 		String name = groupName(ctx);
 		ModelData data = new ModelData(ModelType.Group, ctx, name);
-		maker.module(ctx, name, data);
+		ModuleStmt module = maker.module(ctx, name, data);
+		maker.pushParent(module);
 	}
 
 	public void createTemplateStatement() {
 		TemplateContext ctx = (TemplateContext) lastPathNode();
-		ModelType mType = ctx.AT() != null ? ModelType.Region : ModelType.Template;
-		for (TerminalNode id : ctx.ID()) {
-			ModelData data = new ModelData(mType, ctx, id.getText());
-			maker.statement(ctx, id, data);
+		if (ctx.AT() != null) {
+			ModelData data = new ModelData(ModelType.Region, ctx, AntlrUtil.join(".", ctx.ID()));
+			maker.statement(ctx, ctx.name, data);
+		} else {
+			ModelData data = new ModelData(ModelType.Template, ctx, ctx.name.getText());
+			maker.statement(ctx, ctx.name, data);
 		}
 	}
 
@@ -68,11 +70,11 @@ public abstract class StructureBuilder extends Processor {
 	}
 
 	public void blockEnd() {
-		ParserRuleContext ctx = (ParserRuleContext) lastPathNode();
-		if (ctx instanceof GroupContext) {
-			GroupContext cty = (GroupContext) ctx;
-			maker.block(IDslElement.END_BLOCK, cty.getChild(0), cty.getChild(cty.getChildCount() - 1), null);
-		}
+		// ParserRuleContext ctx = (ParserRuleContext) lastPathNode();
+		// if (ctx instanceof GroupContext) {
+		// GroupContext cty = (GroupContext) ctx;
+		// maker.block(IDslElement.END_BLOCK, cty.getChild(0), cty.getChild(cty.getChildCount() - 1), null);
+		// }
 	}
 
 	private String groupName(GroupContext ctx) {

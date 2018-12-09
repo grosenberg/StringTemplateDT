@@ -25,10 +25,6 @@
  *	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  *	THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-/*
- * Antlr grammar for StringTemplate v4.
- */
 lexer grammar STGLexer ;
 
 @header {
@@ -49,8 +45,7 @@ VERT_WS	:	Vws+ -> channel(HIDDEN)	;
 STRING			: String			  ;
 BIGSTRING		: LDAngle .*? RDAngle ;
 BIGSTRING_NO_NL	: LPct .*? RPct		  ;
-ANON_TEMPLATE	: LBrace .*? RBrace
-									  ;
+ANON_TEMPLATE	: LBrace .*? RBrace	  ;
 
 // -----------------------------------
 // Symbols
@@ -67,8 +62,7 @@ LBRACK : LBrack	;
 RBRACK : RBrack	;
 AT	   : At		;
 TRUE   : True	;
-FALSE  : False
-				;
+FALSE  : False	;
 
 // -----------------------------------
 // Key words
@@ -108,8 +102,7 @@ fragment Vws : [\r\n\f] ;
 fragment DocComment		: '/**' .*?		('*/' | EOF	) ;
 fragment BlockComment	: '/*'  .*?		('*/' | EOF	) ;
 fragment LineComment	: '//' ~[\r\n]*				  ;
-fragment LineCommentExt	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )*
-													  ;
+fragment LineCommentExt	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )* ;
 
 // -----------------------------------
 
@@ -132,8 +125,7 @@ fragment HexDigit : [0-9a-fA-F] ;
 // -----------------------------------
 
 // Literals
-fragment String	: DQuote ( EscSeq | ~["\r\n\\] )* DQuote
-	;
+fragment String	: DQuote ( EscSeq | ~["\r\n\\] )* DQuote ;
 
 // -----------------------------------
 
@@ -168,8 +160,7 @@ fragment NameStartChar
 // Types
 
 fragment True  : 'true' ;
-fragment False : 'false'
-						;
+fragment False : 'false';
 
 // -----------------------------------
 

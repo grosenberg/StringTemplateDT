@@ -6,7 +6,9 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenSource;
 import org.antlr.v4.runtime.misc.Pair;
 
-public class STToken extends CommonToken implements Token {
+import net.certiv.dsl.core.parser.IDslToken;
+
+public class STToken extends CommonToken implements IDslToken {
 
 	private int _mode;
 	protected int charIndex = -1;
@@ -19,6 +21,7 @@ public class STToken extends CommonToken implements Token {
 		super(source, type, channel, start, stop);
 	}
 
+	@Override
 	public int getMode() {
 		return _mode;
 	}

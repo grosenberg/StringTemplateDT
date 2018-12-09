@@ -3,10 +3,10 @@ package net.certiv.stdt.core;
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
+import net.certiv.dsl.core.log.Log;
+import net.certiv.dsl.core.log.Log.LogLevel;
 import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.core.parser.DslSourceParser;
-import net.certiv.dsl.core.util.Log;
-import net.certiv.dsl.core.util.Log.LogLevel;
 import net.certiv.stdt.core.parser.STSourceParser;
 
 public class STCore extends DslCore {

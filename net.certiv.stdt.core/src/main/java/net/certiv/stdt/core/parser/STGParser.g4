@@ -72,7 +72,7 @@ template
 			| BIGSTRING			// <<...>>
 			| BIGSTRING_NO_NL	// <%...%>
 			)
-	| alias=ID ASSIGN target=ID	// alias one template to another
+	| name=ID ASSIGN target=ID	// alias one template to another
 	;
 
 formalArgList

@@ -1,42 +1,79 @@
-/**
- * Introductory Java Doc style Comment
- *
- * @since Forever
+/** Using a type to init value map, try to init a type; if not in table
+ *	must be an object, default value is "null".
  */
+initValue(typeName) ::= <<
+<javaTypeInitMap.(typeName)>
+>>
 
-# ST is almost the same as TOML!
-# So lets use a TOML example.
-title = "TOML Example"
+Parser_(parser, funcs, atn, sempredFuncs, ctor, superClass) ::= <<
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+public class <parser.name> extends <superClass; null="Parser"> {
+	static { RuntimeMetaData.checkVersion("<file.ANTLRVersion>", RuntimeMetaData.VERSION); }
 
-[owner]
-name = "Tom Preston-Werner"
-organization = "GitHub"
-bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
-dob = 1979-05-27T07:32:00Z # First class dates? Why not?
+	protected static final DFA[] _decisionToDFA;
+	protected static final PredictionContextCache _sharedContextCache =
+		new PredictionContextCache();
+	<if(parser.tokens)>
+	public static final int
+		<parser.tokens:{k | <k>=<parser.tokens.(k)>}; separator=", ", wrap, anchor>;
+	<endif>
+	public static final int
+		<parser.rules:{r | RULE_<r.name> = <r.index>}; separator=", ", wrap, anchor>;
+	public static final String[] ruleNames = {
+		<parser.ruleNames:{r | "<r>"}; separator=", ", wrap, anchor>
+	};
 
-[database]
-server = "192.168.1.1"
-ports = [ 8001, 8001, 8002 ]
-connection_max = 5000
-enabled = true
+	<vocabulary(parser.literalNames, parser.symbolicNames)>
 
-/* Complex array example */
-[servers]
+	@Override
+	public String getGrammarFileName() { return "<parser.grammarFileName; format="java-escape">"; }
 
-# You can indent as you please. Tabs or spaces. TOML don't care.
-[servers.alpha]
-ip = "10.0.0.1"
-dc = "eqdc10"
+	<namedActions.members>
+	<parser:(ctor)()>
+	<funcs; separator="\n">
 
-[servers.beta]
-ip = "10.0.0.2"
-dc = "eqdc10"
+<if(sempredFuncs)>
+	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
+		switch (ruleIndex) {
+		<parser.sempredFuncs.values:{f|
+case <f.ruleIndex>:
+	return <f.name>_sempred((<f.ctxType>)_localctx, predIndex);}; separator="\n">
+		}
+		return true;
+	}
+	<sempredFuncs.values; separator="\n">
+<endif>
 
-[clients]
-data = [ ["gamma", "delta"], [1, 2] ]
+	<atn>
+}
+>>
 
-# Line breaks are OK when inside arrays
-hosts = [
-  "alpha",
-  "omega"
-]
+SerializedATN(model) ::= <<
+<if(rest(model.segments))>
+<! requires segmented representation !>
+private static final int _serializedATNSegments = <length(model.segments)>;
+<model.segments:{segment|private static final String _serializedATNSegment<i0> =
+	"<segment; wrap={"+<\n><\t>"}>";}; separator="\n">
+public static final String _serializedATN = Utils.join(
+	new String[] {
+		<model.segments:{segment | _serializedATNSegment<i0>}; separator=",\n">
+	},
+	""
+);
+<else>
+<! only one segment, can be inlined !>
+public static final String _serializedATN =
+	"<model.serialized; wrap={"+<\n><\t>"}>";
+<endif>
+public static final ATN _ATN =
+	new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+static {
+	_decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
+	for (int i = 0; i \< _ATN.getNumberOfDecisions(); i++) {
+		_decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
+	}
+<!	org.antlr.v4.tool.DOTGenerator dot = new org.antlr.v4.tool.DOTGenerator(null);!>
+<!	System.out.println(dot.getDOT(_ATN.decisionToState.get(0), ruleNames, false));!>
+<!	System.out.println(dot.getDOT(_ATN.ruleToStartState[2], ruleNames, false));!>
+}
+>>
