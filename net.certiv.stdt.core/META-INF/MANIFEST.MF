@@ -10,7 +10,6 @@ Bundle-Activator: net.certiv.stdt.core.STCore
 Bundle-Vendor: Certiv Analytics
 Export-Package: net.certiv.stdt.core,
  net.certiv.stdt.core.builder,
- net.certiv.stdt.core.formatter,
  net.certiv.stdt.core.model,
  net.certiv.stdt.core.parser,
  net.certiv.stdt.core.parser.gen,

@@ -3,8 +3,8 @@ package net.certiv.stdt.ui.editor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 
+import net.certiv.dsl.core.model.DslModel;
 import net.certiv.dsl.core.model.IStatement;
-import net.certiv.dsl.core.model.builder.ModelManager;
 import net.certiv.dsl.ui.editor.hyperlink.DslHyperlinkDetector;
 import net.certiv.dsl.ui.editor.text.DslWordFinder;
 import net.certiv.stdt.core.STCore;
@@ -35,8 +35,8 @@ public class STHyperlinkDetector extends DslHyperlinkDetector {
 	}
 
 	@Override
-	public ModelManager getModelMgr() {
-		return STCore.getDefault().getModelManager();
+	public DslModel getDslModel() {
+		return STCore.getDefault().getDslModel();
 	}
 
 }

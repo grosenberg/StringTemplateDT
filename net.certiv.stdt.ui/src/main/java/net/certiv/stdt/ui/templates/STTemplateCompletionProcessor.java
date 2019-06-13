@@ -1,13 +1,6 @@
 package net.certiv.stdt.ui.templates;
 
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.BadPartitioningException;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentExtension3;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.ITypedRegion;
-import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
 
@@ -50,6 +43,7 @@ public class STTemplateCompletionProcessor extends DslTemplateCompletionProcesso
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected TemplateContextType getContextType(ITextViewer viewer, IRegion region) {
 		IDocumentExtension3 doc = (IDocumentExtension3) viewer.getDocument();

@@ -3,7 +3,6 @@ package net.certiv.stdt.ui.wizards;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -12,8 +11,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import net.certiv.dsl.core.DslCore;
@@ -35,7 +32,7 @@ public class STNewWizard extends DslBaseWizard {
 	private STNewWizardPage page;
 
 	public STNewWizard() {
-		super();
+		super("STNewWizard");
 	}
 
 	@Override
@@ -61,48 +58,17 @@ public class STNewWizard extends DslBaseWizard {
 
 	@Override
 	public void addPages() {
-		page = new STNewWizardPage(getSelection());
+		page = new STNewWizardPage(this, getSelection());
 		page.setTitle("Template");
 		page.setDescription("Create new StringTemplate group template file");
 		addPage(page);
 	}
 
 	@Override
-	public boolean performFinish() {
+	protected void finishPage(IProgressMonitor monitor) throws InterruptedException, CoreException {
+
 		final String filename = page.getFileName();
-		final IPath container = page.getContainerFullPath();
-
-		IRunnableWithProgress op = new IRunnableWithProgress() {
-
-			@Override
-			public void run(IProgressMonitor monitor) throws InvocationTargetException {
-				try {
-					doFinish(filename, container, monitor);
-				} catch (CoreException e) {
-					throw new InvocationTargetException(e);
-				} finally {
-					monitor.done();
-				}
-			}
-		};
-		try {
-			getContainer().run(true, false, op);
-		} catch (InterruptedException e) {
-			return false;
-		} catch (InvocationTargetException e) {
-			Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * The worker method. It will find the container, create the file if missing or just replace its
-	 * contents, and open the editor on the newly created file.
-	 */
-
-	private void doFinish(String filename, IPath containerPath, IProgressMonitor monitor) throws CoreException {
+		final IPath containerPath = page.getContainerFullPath();
 
 		monitor.beginTask("Creating " + filename, 2);
 		IWorkspaceRoot root = CoreUtil.getWorkspaceRoot();

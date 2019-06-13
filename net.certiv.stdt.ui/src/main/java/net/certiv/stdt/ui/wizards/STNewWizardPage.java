@@ -8,14 +8,15 @@ import org.eclipse.swt.widgets.Composite;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.ui.DslUI;
+import net.certiv.dsl.ui.wizards.DslBaseWizard;
 import net.certiv.dsl.ui.wizards.DslContainerWizardPage;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
 
 public class STNewWizardPage extends DslContainerWizardPage {
 
-	public STNewWizardPage(IStructuredSelection selection) {
-		super("wizardPage", selection);
+	public STNewWizardPage(DslBaseWizard wizard, IStructuredSelection selection) {
+		super("STNewWizardPage", wizard, selection);
 	}
 
 	@Override

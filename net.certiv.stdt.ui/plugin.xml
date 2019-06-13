@@ -134,12 +134,6 @@
             id="net.certiv.stdt.ui.preferences.page.PrefPageCodeTemplates"
             name="Templates">
       </page>
-      <page
-            category="net.certiv.stdt.ui.preferences.page.PrefPageGeneral"
-            class="net.certiv.stdt.ui.preferences.page.FormatterPage"
-            id="net.certiv.stdt.ui.preferences.page.PrefPageFormatter"
-            name="Formatter">
-      </page>
    </extension>
 
    <extension
@@ -159,12 +153,6 @@
             description="STDsl Source Actions"
             id="net.certiv.stdt.ui.category.source">
       </category>
-      <command
-            name="Format"
-            description="Format Source"
-            categoryId="net.certiv.stdt.ui.category.source"
-            id="net.certiv.stdt.ui.edit.text.format">
-      </command>
       <command
             name="Comment/Uncomment"
             description="Comment/Uncomment the selected lines"
@@ -237,16 +225,6 @@
 			</enabledWhen>
       </handler>
       <handler
-            class="net.certiv.dsl.ui.handlers.FormatHandler"
-            commandId="net.certiv.stdt.ui.edit.text.format">
-			<activeWhen>
-				<reference definitionId="net.certiv.stdt.activeContexts.definition" />
-			</activeWhen>
-			<enabledWhen>
-				<reference definitionId="net.certiv.stdt.activeContexts.definition" />
-			</enabledWhen>
-      </handler>
-      <handler
             class="net.certiv.dsl.ui.handlers.BuildHandler"
             commandId="net.certiv.stdt.ui.build">
 			<activeWhen>
@@ -262,11 +240,6 @@
  
       <!--  win32:  M1=CTRL,    M2=SHIFT, M3=ALT, M4=-
             carbon: M1=COMMAND, M2=SHIFT, M3=ALT, M4=CTRL -->
-   	 <key
-            sequence="M1+M2+F"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            contextId="net.certiv.stdt.ui.stEditorScope"
-            commandId="net.certiv.stdt.ui.edit.text.format"/>      
      <key
             sequence="M1+/"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
@@ -334,7 +307,7 @@
      <contextType
            class="net.certiv.stdt.ui.templates.STTemplateContextType"
            id="net.certiv.stdt.ui.DefaultContext"
-           name="Default">
+           name="Template">
      </contextType>
   </extension>
   <!--

@@ -62,9 +62,10 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Loads content formatters into the SourceViewer for execution on receipt of a ISourceViewer.FORMAT
-	 * command. Where nothing is selected in the document, <b>should</b> execute the master strategy for
-	 * the default partition and then the slave strategies for the non-default partitions.
+	 * Loads content formatters into the SourceViewer for execution on receipt of a
+	 * ISourceViewer.FORMAT command. Where nothing is selected in the document,
+	 * <b>should</b> execute the master strategy for the default partition and then
+	 * the slave strategies for the non-default partitions.
 	 *
 	 * @param sourceViewer the viewer that will contain the content to format
 	 * @return the content formatter
@@ -91,7 +92,7 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	@Override
 	public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
 		if (STCore.getDefault().getPrefsManager().getTabStyle() == TabStyle.SPACES) {
-			return new String[] { Strings.dup(STCore.getDefault().getPrefsManager().getIndentationSize(), " ") };
+			return new String[] { Strings.dup(STCore.getDefault().getPrefsManager().getTabWidth(), " ") };
 		} else {
 			return new String[] { "\t" };
 		}
@@ -118,14 +119,16 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Adapts the behavior of the contained components to the change encoded in the given event.
+	 * Adapts the behavior of the contained components to the change encoded in the
+	 * given event.
 	 * <p>
-	 * Clients are not allowed to call this method if the old setup with text tools is in use.
+	 * Clients are not allowed to call this method if the old setup with text tools
+	 * is in use.
 	 * </p>
 	 *
 	 * @param event the event to which to adapt
 	 * @see PythonSourceViewerConfiguration#ScriptSourceViewerConfiguration(IColorManager,
-	 *      IPreferenceStore, ITextEditor, String)
+	 *          IPreferenceStore, ITextEditor, String)
 	 */
 	@Override
 	public void handlePropertyChangeEvent(PropertyChangeEvent event) {
@@ -136,8 +139,8 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Determines whether the preference change encoded by the given event changes the behavior of one
-	 * of its contained components.
+	 * Determines whether the preference change encoded by the given event changes
+	 * the behavior of one of its contained components.
 	 *
 	 * @param event the event to be investigated
 	 * @return <code>true</code> if event causes a behavioral change

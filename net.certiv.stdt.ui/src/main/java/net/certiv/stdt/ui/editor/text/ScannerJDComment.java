@@ -24,7 +24,7 @@ public class ScannerJDComment extends AbstractBufferedRuleBasedScanner {
 	@Override
 	protected String[] getTokenProperties() {
 		if (tokens == null) {
-			tokens = new String[] { bind(Prefs.EDITOR_COMMENT_JD_COLOR) };
+			tokens = new String[] { bind(Prefs.EDITOR_COMMENT_DC_COLOR) };
 		}
 		return tokens;
 	}
@@ -32,7 +32,7 @@ public class ScannerJDComment extends AbstractBufferedRuleBasedScanner {
 	@Override
 	protected List<IRule> createRules() {
 		List<IRule> rules = new ArrayList<IRule>();
-		IToken token = getToken(bind(Prefs.EDITOR_COMMENT_JD_COLOR));
+		IToken token = getToken(bind(Prefs.EDITOR_COMMENT_DC_COLOR));
 		rules.add(new MultiLineRule("/**", "*/", token, '\\'));
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));
 		return rules;

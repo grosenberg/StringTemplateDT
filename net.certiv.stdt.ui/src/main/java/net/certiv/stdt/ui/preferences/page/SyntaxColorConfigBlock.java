@@ -34,9 +34,9 @@ public class SyntaxColorConfigBlock extends AbstractSyntaxColorConfigBlock {
 
 	@Override
 	protected List<String> createDeltaMatchKeys(List<String> keys) {
-		keys.add(Editor.EDITOR_COMMENT_JD_COLOR);
-		keys.add(Editor.EDITOR_COMMENT_ML_COLOR);
-		keys.add(Editor.EDITOR_COMMENT_SL_COLOR);
+		keys.add(Editor.EDITOR_COMMENT_DC_COLOR);
+		keys.add(Editor.EDITOR_COMMENT_BL_COLOR);
+		keys.add(Editor.EDITOR_COMMENT_LN_COLOR);
 		keys.add(Editor.EDITOR_KEYWORDS_COLOR);
 		keys.add(Editor.EDITOR_STRING_COLOR);
 		return keys;
@@ -44,9 +44,9 @@ public class SyntaxColorConfigBlock extends AbstractSyntaxColorConfigBlock {
 
 	@Override
 	protected void initCatPrefsModel() {
-		addColorPreference("Comments", "JavaDoc", Editor.EDITOR_COMMENT_JD_COLOR);
-		addColorPreference("Comments", "Block", Editor.EDITOR_COMMENT_ML_COLOR);
-		addColorPreference("Comments", "Single line", Editor.EDITOR_COMMENT_SL_COLOR);
+		addColorPreference("Comments", "JavaDoc", Editor.EDITOR_COMMENT_DC_COLOR);
+		addColorPreference("Comments", "Block", Editor.EDITOR_COMMENT_BL_COLOR);
+		addColorPreference("Comments", "Single line", Editor.EDITOR_COMMENT_LN_COLOR);
 		addColorPreference("Template", "Keywords", Editor.EDITOR_KEYWORDS_COLOR);
 		addColorPreference("Template", "Strings", Editor.EDITOR_STRING_COLOR);
 	}
