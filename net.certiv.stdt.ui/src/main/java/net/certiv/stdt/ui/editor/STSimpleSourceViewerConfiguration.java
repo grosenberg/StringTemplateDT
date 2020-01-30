@@ -3,6 +3,7 @@ package net.certiv.stdt.ui.editor;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.source.IAnnotationHover;
@@ -11,7 +12,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
-import net.certiv.dsl.ui.editor.reconcile.DslReconciler;
+import net.certiv.dsl.ui.editor.reconcile.Reconciler;
 
 public class STSimpleSourceViewerConfiguration extends STSourceViewerConfiguration {
 
@@ -55,6 +56,9 @@ public class STSimpleSourceViewerConfiguration extends STSourceViewerConfigurati
 	}
 
 	@Override
+	public void specializeContentAssistant(ContentAssistant assistant) {}
+
+	@Override
 	public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
 		return null;
 	}
@@ -78,7 +82,7 @@ public class STSimpleSourceViewerConfiguration extends STSourceViewerConfigurati
 	}
 
 	@Override
-	public DslReconciler getReconciler(ISourceViewer viewer) {
+	public Reconciler getReconciler(ISourceViewer viewer) {
 		return null;
 	}
 }

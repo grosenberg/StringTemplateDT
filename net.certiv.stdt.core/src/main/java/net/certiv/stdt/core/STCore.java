@@ -3,22 +3,19 @@ package net.certiv.stdt.core;
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
+import net.certiv.dsl.core.lang.LanguageManager;
 import net.certiv.dsl.core.log.Log;
 import net.certiv.dsl.core.log.Log.LogLevel;
-import net.certiv.dsl.core.model.ICodeUnit;
-import net.certiv.dsl.core.parser.DslSourceParser;
-import net.certiv.stdt.core.parser.STSourceParser;
 
 public class STCore extends DslCore {
 
-	private static final String[] EXTENSIONS = new String[] { "st", "stg" };
-	public static final String DSL_NAME = "stg";
-
 	public static STCore plugin;
+
+	private STLangManager langMgr;
 
 	public STCore() {
 		super();
-		Log.defLevel(LogLevel.Debug);
+		Log.defLevel(LogLevel.Info);
 	}
 
 	public static STCore getDefault() {
@@ -48,15 +45,10 @@ public class STCore extends DslCore {
 	}
 
 	@Override
-	public String[] getDslFileExtensions() {
-		return EXTENSIONS;
-	}
-
-	@Override
-	public DslSourceParser createSourceParser(ICodeUnit unit, String contentType) {
-		if (DSL_NAME.equals(contentType) || getContentTypeId().equals(contentType)) {
-			return new STSourceParser(unit.getParseRecord());
+	public LanguageManager getLangManager() {
+		if (langMgr == null) {
+			langMgr = new STLangManager(this);
 		}
-		return null;
+		return langMgr;
 	}
 }

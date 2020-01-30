@@ -82,7 +82,7 @@ public class STEditor extends DslEditor {
 
 	@Override
 	protected STOutlinePage doCreateOutlinePage() {
-		return new STOutlinePage(this, getPreferenceStore());
+		return new STOutlinePage(getPreferenceStore());
 	}
 
 	@Override

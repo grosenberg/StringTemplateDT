@@ -8,19 +8,17 @@ import net.certiv.dsl.core.log.Log.LogLevel;
 import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
+import net.certiv.dsl.ui.templates.CompletionManager;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.editor.STEditor;
 import net.certiv.stdt.ui.editor.STTextTools;
-import net.certiv.stdt.ui.templates.STTemplateContextType;
 
 public class STUI extends DslUI {
-
-	// Should be unique, lower case, single word
-	private static final String DSL_NAME = "st";
 
 	private static STUI plugin;
 	private DslTextTools textTools;
 	private DslImageManager imgMgr;
+	private STCompletionManager compMgr;
 
 	public STUI() {
 		super();
@@ -59,11 +57,6 @@ public class STUI extends DslUI {
 	}
 
 	@Override
-	public String getDslLanguageName() {
-		return DSL_NAME;
-	}
-
-	@Override
 	public DslTextTools getTextTools() {
 		if (textTools == null) {
 			textTools = new STTextTools(true);
@@ -80,12 +73,15 @@ public class STUI extends DslUI {
 	}
 
 	@Override
-	protected String[] getDslContextTypes() {
-		return new String[] { STTemplateContextType.ST_CONTEXT_TYPE_ID };
+	public String getEditorId() {
+		return STEditor.EDITOR_ID;
 	}
 
 	@Override
-	protected String getEditorId() {
-		return STEditor.EDITOR_ID;
+	public CompletionManager getCompletionMgr() {
+		if (compMgr == null) {
+			compMgr = new STCompletionManager(this, getEditorId());
+		}
+		return compMgr;
 	}
 }

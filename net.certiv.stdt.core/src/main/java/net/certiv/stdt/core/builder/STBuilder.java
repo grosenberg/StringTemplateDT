@@ -13,11 +13,10 @@ import net.certiv.stdt.core.STCore;
 
 public class STBuilder extends DslBuilder {
 
-	public static final String BUILDER_ID = "net.certiv.stdt.core.builder";
+	private static final String TASK_ID = "StringTemplate";
 
 	@Override
-	public IStatus buildSourceModules(IProgressMonitor monitor, int ticks, List<ICodeUnit> srcModules)
-			throws CoreException {
+	protected IStatus buildUnits(List<ICodeUnit> srcModules, IProgressMonitor monitor, int ticks) throws CoreException {
 		return null;
 	}
 
@@ -27,7 +26,7 @@ public class STBuilder extends DslBuilder {
 	}
 
 	@Override
-	public String getBuilderID() {
-		return BUILDER_ID;
+	protected String taskId() {
+		return TASK_ID;
 	}
 }

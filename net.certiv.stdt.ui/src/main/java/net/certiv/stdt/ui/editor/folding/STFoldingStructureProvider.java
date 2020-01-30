@@ -2,12 +2,12 @@ package net.certiv.stdt.ui.editor.folding;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.ui.DslUI;
-import net.certiv.dsl.ui.editor.text.folding.AbstractDslFoldingStructureProvider;
+import net.certiv.dsl.ui.editor.text.folding.AbstractFoldingStructureProvider;
 import net.certiv.stdt.core.STCore;
 import net.certiv.stdt.ui.STUI;
 import net.certiv.stdt.ui.editor.Partitions;
 
-public class STFoldingStructureProvider extends AbstractDslFoldingStructureProvider {
+public class STFoldingStructureProvider extends AbstractFoldingStructureProvider {
 
 	public STFoldingStructureProvider() {
 		super();

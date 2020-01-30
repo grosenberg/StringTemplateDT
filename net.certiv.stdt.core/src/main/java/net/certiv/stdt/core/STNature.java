@@ -1,7 +1,7 @@
 package net.certiv.stdt.core;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.DslNature;
+import net.certiv.dsl.core.lang.DslNature;
 
 public class STNature extends DslNature {
 

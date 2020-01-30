@@ -133,6 +133,7 @@ fragment String	: DQuote ( EscSeq | ~["\r\n\\] )* DQuote ;
 fragment NameChar
 	:	NameStartChar
 	|	'0'..'9'
+	|	Dash
 	|	Underscore
 	|	'\u00B7'
 	|	'\u0300'..'\u036F'
@@ -175,6 +176,8 @@ fragment Comma		: ','  ;
 fragment Equal		: '='  ;
 fragment DQuote		: '"'  ;
 fragment Underscore	: '_'  ;
+fragment Dash		: '-'  ;
+
 fragment LParen	: '('  ;
 fragment RParen	: ')'  ;
 fragment LBrace	: '{'  ;

@@ -9,7 +9,7 @@ import net.certiv.stdt.core.parser.gen.STLexer;
  * Base class for the Lexer. Combines functionality for <br>
  * <ul>
  * <li>lexer error strategy</li>
- * <li>various maker routines</li>
+ * <li>various builder routines</li>
  * <ul>
  * 
  * @author Gbr
