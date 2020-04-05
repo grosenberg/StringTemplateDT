@@ -260,15 +260,15 @@
    <extension
          point="org.eclipse.ui.editors.markerAnnotationSpecification">
       <specification
-            annotationImageProvider="net.certiv.stdt.ui.editor.STAnnotationImageProvider"
+            annotationImageProvider="net.certiv.stdt.ui.editor.AnnotationImageProvider"
             annotationType="net.certiv.stdt.ui.error">
       </specification>
       <specification
-            annotationImageProvider="net.certiv.stdt.ui.editor.STAnnotationImageProvider"
+            annotationImageProvider="net.certiv.stdt.ui.editor.AnnotationImageProvider"
             annotationType="net.certiv.stdt.ui.warning">
       </specification>
       <specification
-            annotationImageProvider="net.certiv.stdt.ui.editor.STAnnotationImageProvider"
+            annotationImageProvider="net.certiv.stdt.ui.editor.AnnotationImageProvider"
             annotationType="net.certiv.stdt.ui.info">
       </specification>
       <specification

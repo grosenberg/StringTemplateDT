@@ -1,6 +1,6 @@
 package net.certiv.stdt.core;
 
-import net.certiv.dsl.core.DslContentDescriber;
+import net.certiv.dsl.core.lang.DslContentDescriber;
 
 public class STContentDescriber extends DslContentDescriber {
 

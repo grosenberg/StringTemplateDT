@@ -8,19 +8,18 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
-import net.certiv.dsl.ui.editor.reconcile.Reconciler;
+import net.certiv.dsl.ui.editor.DslEditor;
 
 public class STSimpleSourceViewerConfiguration extends STSourceViewerConfiguration {
 
-	public STSimpleSourceViewerConfiguration(IDslPrefsManager store, ITextEditor editor, String partitioning) {
+	public STSimpleSourceViewerConfiguration(IDslPrefsManager store, DslEditor editor, String partitioning) {
 		super(null, store, editor, partitioning);
 	}
 
-	public STSimpleSourceViewerConfiguration(IColorManager colorManager, IDslPrefsManager store, ITextEditor editor,
+	public STSimpleSourceViewerConfiguration(IColorManager colorManager, IDslPrefsManager store, DslEditor editor,
 			String partitioning, boolean configureFormatter) {
 		super(colorManager, store, editor, partitioning);
 	}
@@ -78,11 +77,6 @@ public class STSimpleSourceViewerConfiguration extends STSourceViewerConfigurati
 
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
-		return null;
-	}
-
-	@Override
-	public Reconciler getReconciler(ISourceViewer viewer) {
 		return null;
 	}
 }

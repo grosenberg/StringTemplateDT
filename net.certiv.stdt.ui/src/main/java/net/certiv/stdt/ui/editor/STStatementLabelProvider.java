@@ -4,12 +4,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 import net.certiv.dsl.ui.DslImageDescriptor;
-import net.certiv.dsl.ui.editor.StatementLabelProvider;
+import net.certiv.dsl.ui.editor.outline.OutlineLabelProvider;
 import net.certiv.stdt.core.model.Specialization;
 import net.certiv.stdt.ui.STImageManager;
 import net.certiv.stdt.ui.STUI;
 
-public class STStatementLabelProvider extends StatementLabelProvider {
+public class STStatementLabelProvider extends OutlineLabelProvider {
 
 	public STStatementLabelProvider() {
 		super(STUI.getDefault().getImageManager());

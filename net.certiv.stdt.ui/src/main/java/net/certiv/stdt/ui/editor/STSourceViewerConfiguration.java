@@ -17,7 +17,6 @@ import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.color.IColorManager;
@@ -27,6 +26,7 @@ import net.certiv.dsl.core.util.eclipse.TabStyle;
 import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.DoubleClickStrategy;
+import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslSourceViewerConfiguration;
 import net.certiv.dsl.ui.editor.reconcile.PresentationReconciler;
 import net.certiv.dsl.ui.editor.text.completion.CompletionCategory;
@@ -52,9 +52,9 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	private ScannerMLComment commentMLScanner;
 	private ScannerJDComment commentJDScanner;
 
-	public STSourceViewerConfiguration(IColorManager colorManager, IDslPrefsManager store, ITextEditor editor,
+	public STSourceViewerConfiguration(IColorManager colorMgr, IDslPrefsManager store, DslEditor editor,
 			String partitioning) {
-		super(colorManager, store, editor, partitioning);
+		super(STCore.getDefault(), colorMgr, store, editor, partitioning);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	 *
 	 * @param event the event to which to adapt
 	 * @see PythonSourceViewerConfiguration#ScriptSourceViewerConfiguration(IColorManager,
-	 *          IPreferenceStore, ITextEditor, String)
+	 *          IPreferenceStore, DslEditor, String)
 	 */
 	@Override
 	public void handlePropertyChangeEvent(PropertyChangeEvent event) {

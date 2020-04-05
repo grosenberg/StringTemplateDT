@@ -3,10 +3,10 @@ package net.certiv.stdt.ui.editor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import net.certiv.dsl.core.color.IColorManager;
 import net.certiv.dsl.core.preferences.IDslPrefsManager;
+import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslSourceViewerConfiguration;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
 import net.certiv.stdt.core.STCore;
@@ -51,7 +51,7 @@ public class STTextTools extends DslTextTools {
 	}
 
 	@Override
-	public DslSourceViewerConfiguration createSourceViewerConfiguraton(IDslPrefsManager store, ITextEditor editor,
+	public DslSourceViewerConfiguration createSourceViewerConfiguraton(IDslPrefsManager store, DslEditor editor,
 			String partitioning) {
 		return new STSourceViewerConfiguration(getColorManager(), store, editor, partitioning);
 	}
