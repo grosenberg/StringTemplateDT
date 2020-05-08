@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="net.certiv.st.dt.ui.editor.STDocumentSetupParticipant"
+         name="ST Document"
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            class="net.certiv.st.dt.ui.editor.STDocumentSetupParticipant"
+            contentTypeId="net.certiv.st.dt.core.contentType"
+            extensions="stg">
+      </participant>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            class="net.certiv.dsl.ui.DslElementAdapterFactory"
+            adaptableType="net.certiv.dsl.core.model.IDslElement">
+         <adapter
+               type="org.eclipse.core.resources.IResource">
+         </adapter>
+         <adapter
+               type="org.eclipse.core.resources.IProject">
+         </adapter>
+         <adapter
+               type="org.eclipse.ui.model.IWorkbenchAdapter">
+         </adapter>
+         <adapter
+               type="org.eclipse.ui.views.properties.IPropertySource">
+         </adapter>
+         <adapter type="org.eclipse.ui.progress.IDeferredWorkbenchAdapter"/>
+         <adapter type="org.eclipse.ui.IActionFilter"/>
+         <adapter type="org.eclipse.core.resources.IWorkspaceRoot"/>
+      </factory>
+   </extension>
+   <extension point="org.eclipse.core.expressions.definitions">
+		<definition id="net.certiv.st.dt.activeContexts.definition">
+			<with variable="activePartId">
+				<equals value="net.certiv.st.dt.ui.STEditor"/>
+			</with>
+		</definition>
+	</extension>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="ST Editor"
+            default="true"
+            extensions="stg"
+            icon="icons/obj16/stg.png"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="net.certiv.st.dt.ui.editor.STEditor"
+            id="net.certiv.st.dt.ui.STEditor">
+         <contentTypeBinding
+               contentTypeId="net.certiv.st.dt.core.contentType">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerSeverity="2"
+            markerType="net.certiv.st.dt.core.problem"
+            name="net.certiv.st.dt.ui.error"
+            super="org.eclipse.ui.workbench.texteditor.error">
+      </type>
+      <type
+            markerSeverity="1"
+            markerType="net.certiv.st.dt.core.problem"
+            name="net.certiv.st.dt.ui.warning"
+            super="org.eclipse.ui.workbench.texteditor.warning">
+      </type>
+      <type
+            markerSeverity="0"
+            markerType="net.certiv.st.dt.core.problem"
+            name="net.certiv.st.dt.ui.info"
+            super="org.eclipse.ui.workbench.texteditor.info">
+      </type>
+      <type
+            name="net.certiv.st.dt.ui.occurrences">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            canFinishEarly="false"
+            category="net.certiv.certivtools.wizards"
+            class="net.certiv.st.dt.ui.wizards.STNewWizard"
+            icon="icons/obj16/stg.png"
+            id="net.certiv.st.dt.ui.wizards.STNewWizard"
+            name="New ST group file">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="net.certiv.certivtools.prefs.TopLevelPage"
+            class="net.certiv.st.dt.ui.preferences.page.GeneralPage"
+            id="net.certiv.st.dt.ui.preferences.page.PrefPageGeneral"
+            name="StringTemplate">
+      </page>
+      <page
+            category="net.certiv.st.dt.ui.preferences.page.PrefPageGeneral"
+            class="net.certiv.st.dt.ui.preferences.page.EditorPage"
+            id="net.certiv.st.dt.preferences.page.PrefPageEditor"
+            name="Editor">
+      </page>
+      <page
+            category="net.certiv.st.dt.ui.preferences.page.PrefPageGeneral"
+            class="net.certiv.st.dt.ui.preferences.page.FoldingPage"
+            id="net.certiv.st.dt.ui.preferences.page.PrefPageFolding"
+            name="Folding">
+      </page>
+      <page
+            category="net.certiv.st.dt.ui.preferences.page.PrefPageGeneral"
+            class="net.certiv.st.dt.ui.preferences.page.SyntaxColorPage"
+            id="net.certiv.st.dt.ui.preferences.page.PrefPageSyntaxColoring"
+            name="Syntax Coloring">
+      </page>
+      <page
+            category="net.certiv.st.dt.ui.preferences.page.PrefPageGeneral"
+            class="net.certiv.st.dt.ui.preferences.page.TemplatesPage"
+            id="net.certiv.st.dt.ui.preferences.page.PrefPageCodeTemplates"
+            name="Templates">
+      </page>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="STEditor Context"
+            id="net.certiv.st.dt.ui.stEditorScope"
+            name="STEditor Content"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+
+      <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="ST source"
+            description="ST source actions"
+            id="net.certiv.st.dt.ui.category.source">
+      </category>
+      <command
+            name="Comment/Uncomment"
+            description="Comment/Uncomment the selected lines"
+            categoryId="net.certiv.st.dt.ui.category.source"
+            id="net.certiv.st.dt.ui.edit.text.toggle.comment">
+      </command>
+      <command
+            categoryId="net.certiv.st.dt.ui.category.source"
+            description="Toggles mark occurrences in Dsl editors"
+            id="net.certiv.st.dt.ui.edit.text.toggleMarkOccurrences"
+            name="Mark Occurrences">
+         <state
+               class="org.eclipse.ui.handlers.RegistryToggleState:false"
+               id="org.eclipse.ui.commands.toggleState">
+         </state>
+      </command>
+      <command
+            description="Clear Dsl problem markers"
+            id="net.certiv.st.dt.ui.cleanGrammarCommand"
+            name="Clear Dsl Problem Markers">
+      </command>
+
+   </extension>
+
+
+<!--
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           categoryId="org.eclipse.ui.category.edit"
+           defaultHandler="net.certiv.dsl.internal.ui.text.completion.ContentAssistHandler"
+           description="Invokes content assist command"
+           id="net.certiv.dsl.ui.content_assist.command"
+           name="Content Assist">
+        <commandParameter
+              id="net.certiv.dsl.ui.content_assist.command.id"
+              name="Content Assist Parameter"
+              optional="true"
+              values="net.certiv.dsl.ui.text.completion.ContentAssistComputerParameter">
+        </commandParameter>
+     </command>
+  </extension>
+-->
+
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="net.certiv.dsl.ui.handlers.ToggleCommentHandler"
+            commandId="net.certiv.st.dt.ui.edit.text.toggle.comment">
+			<activeWhen>
+				<reference definitionId="net.certiv.st.dt.activeContexts.definition" />
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="net.certiv.st.dt.activeContexts.definition" />
+			</enabledWhen>
+      </handler>
+      <handler
+            class="net.certiv.st.dt.ui.actions.STToggleMarkOccurrencesHandler"
+            commandId="net.certiv.st.dt.ui.edit.text.toggleMarkOccurrences">
+			<activeWhen>
+				<reference definitionId="net.certiv.st.dt.activeContexts.definition" />
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="net.certiv.st.dt.activeContexts.definition" />
+			</enabledWhen>
+      </handler>
+      <handler
+            class="net.certiv.dsl.ui.handlers.CleanGrammarHandler"
+            commandId="net.certiv.st.dt.ui.cleanGrammarCommand">
+      </handler>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+
+      <!--  win32:  M1=CTRL,    M2=SHIFT, M3=ALT, M4=-
+            carbon: M1=COMMAND, M2=SHIFT, M3=ALT, M4=CTRL -->
+     <key
+            sequence="M1+/"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="net.certiv.st.dt.ui.stEditorScope"
+            commandId="net.certiv.st.dt.ui.edit.text.toggle.comment"/>
+	 <key
+	        sequence="M2+M3+O"
+	        contextId="net.certiv.st.dt.ui.stEditorScope"
+	        commandId="net.certiv.st.dt.ui.edit.text.toggleMarkOccurrences"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	 <key
+	        platform="carbon"
+	        sequence="M1+M3+O"
+	        contextId="net.certiv.st.dt.ui.stEditorScope"
+	        commandId="net.certiv.st.dt.ui.edit.text.toggleMarkOccurrences"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	</extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationImageProvider="net.certiv.st.dt.ui.editor.AnnotationImageProvider"
+            annotationType="net.certiv.st.dt.ui.error">
+      </specification>
+      <specification
+            annotationImageProvider="net.certiv.st.dt.ui.editor.AnnotationImageProvider"
+            annotationType="net.certiv.st.dt.ui.warning">
+      </specification>
+      <specification
+            annotationImageProvider="net.certiv.st.dt.ui.editor.AnnotationImageProvider"
+            annotationType="net.certiv.st.dt.ui.info">
+      </specification>
+      <specification
+            annotationType="net.certiv.st.dt.ui.occurrences"
+            colorPreferenceKey="occurrenceIndicationColor"
+            colorPreferenceValue="212,212,212"
+            contributesToHeader="false"
+            highlightPreferenceKey="occurrenceHighlighting"
+            highlightPreferenceValue="true"
+            icon="$nl$/icons/full/obj16/searchm_obj.png"
+            includeOnPreferencePage="true"
+            isGoToNextNavigationTarget="false"
+            isGoToNextNavigationTargetKey="isOccurrenceGoToNextNavigationTarget"
+            isGoToPreviousNavigationTarget="false"
+            isGoToPreviousNavigationTargetKey="isOccurrenceGoToPreviousNavigationTarget"
+            label="Occurrences"
+            overviewRulerPreferenceKey="occurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            presentationLayer="4"
+            showInNextPrevDropdownToolbarAction="true"
+            showInNextPrevDropdownToolbarActionKey="showOccurrenceInNextPrevDropdownToolbarAction"
+            textPreferenceKey="occurrenceIndication"
+            textPreferenceValue="false"
+            textStylePreferenceKey="occurrenceTextStyle"
+            textStylePreferenceValue="NONE"
+            verticalRulerPreferenceKey="occurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="false">
+      </specification>
+   </extension>
+  <extension
+        point="org.eclipse.ui.editors.templates">
+     <include
+           file="src/main/resources/templates/templates.xml"
+           translations="src/main/resources/templates/templates.properties">
+     </include>
+     <contextType
+           class="net.certiv.st.dt.ui.templates.STTemplateContextType"
+           id="net.certiv.st.dt.ui.DefaultContext"
+           name="Template">
+     </contextType>
+  </extension>
+  
+  <!--
+  <extension
+        id="defaultProposalCategory"
+        name="Dsl Proposals"
+        point="net.certiv.dsl.ui.completionProposalComputer">
+     <proposalCategory></proposalCategory>
+  </extension>
+  <extension
+        id="templateProposalCategory"
+        name="Template Proposals"
+        point="net.certiv.dsl.ui.completionProposalComputer">
+     <proposalCategory
+           icon="icons/elcl16/templateprop_co.png"></proposalCategory>
+  </extension>
+  <extension
+        id="TemplateCompletionProposalComputer"
+        point="net.certiv.dsl.ui.completionProposalComputer">
+     <completionProposalComputer
+           categoryId="net.certiv.st.dt.ui.templateProposalCategory"
+           class="net.certiv.st.dt.ui.editor.completion.STCodeCompletionComputer">
+        <partition
+              type="__dftl_partition_content_type">
+        </partition>
+        <partition
+              type="__comment_multi_line">
+        </partition>
+     </completionProposalComputer>
+  </extension>
+  -->
+
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="net.certiv.st.dt.ui.toolbars.dslToolbar">
+            <command
+                  commandId="net.certiv.st.dt.ui.edit.text.toggleMarkOccurrences"
+                  icon="icons/etool16/mark_occurrences.png"
+                  style="toggle"
+                  tooltip="Toggle Mark Occcurrences">
+	            <visibleWhen
+    	              checkEnabled="false">
+        	       <reference
+            	         definitionId="net.certiv.st.dt.activeContexts.definition">
+	               </reference>
+    	        </visibleWhen>
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   
+   	<extension point="org.eclipse.ui.menus">
+    	<menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="net.certiv.st.dt.ui.cleanGrammarCommand"
+               icon="icons/elcl16/ok.png"
+               id="net.certiv.st.dt.ui.popups.cleanGrammarCommand"
+               tooltip="Clear Dsl problem markers">
+            style="push">
+            <visibleWhen
+                  checkEnabled="false">
+				<reference definitionId="net.certiv.st.dt.activeContexts.definition"/>
+			</visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   
+   
+   
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            class="net.certiv.st.dt.ui.editor.STHyperlinkDetector"
+            id="net.certiv.st.dt.ui.editor.STHyperlinkDetector"
+            name="StringTemplateHyperlinkDetector"
+            targetId="net.certiv.dsl.ui.codeUnit">
+      </hyperlinkDetector>
+   </extension>
+
+
+</plugin>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            describer="net.certiv.st.dt.core.STContentDescriber"
+            file-extensions="stg"
+            id="net.certiv.st.dt.core.contentType"
+            name="ST Content Type"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         id="problem"
+         name="ST Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="net.certiv.st.dt.core.preferences.PrefsInitializer">
+      </initializer>
+   </extension>
+
+   <!--
+   <extension
+         point="net.certiv.dsl.core.modelBuilderFactory">
+      <modelBuilderFactory
+            class="net.certiv.st.dt.core.parser.STSourceParserFactory"
+            description="ST Model Builder Factory"
+            name="ST Model Builder Factory"
+            natureId="net.certiv.st.dt.core.nature"
+            priority="0">
+      </modelBuilderFactory>
+   </extension>
+   -->
+
+</plugin>

@@ -1,0 +1,18 @@
+delimiters "%", "%"
+
+TagOpenBeg(tag, indent) ::= <<
+%indent%<%tag%>
+>>
+
+TagOpenEnd(tag, indent) ::= <<
+%indent%</%tag%>
+>>
+
+TagClosed(tag, indent) ::= <<
+%indent%<%tag% />
+>>
+
+CommentBeg() ::= "<!-- "
+
+CommentEnd() ::= " -->"
+
