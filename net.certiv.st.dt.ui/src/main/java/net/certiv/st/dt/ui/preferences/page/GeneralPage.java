@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.color.DslColorManager;
+import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.PrefsDeltaManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.preferences.blocks.IPreferenceConfigBlock;
@@ -50,7 +50,7 @@ public class GeneralPage extends AbstractFieldEditorPreferencePage {
 
 	@Override
 	protected IPreferenceConfigBlock createConfigurationBlock(AbstractFieldEditorPreferencePage page, Composite parent,
-			PrefsDeltaManager delta, FormToolkit formkit, DslColorManager colorMgr) {
+			PrefsDeltaManager delta, FormToolkit formkit, DslColorRegistry reg) {
 		return null;
 	}
 

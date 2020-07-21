@@ -7,8 +7,10 @@ import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.log.Log;
 import net.certiv.dsl.core.log.Log.LogLevel;
 import net.certiv.dsl.core.model.builder.ModelBuilder;
+import net.certiv.dsl.core.parser.DslErrorListener;
 import net.certiv.dsl.core.parser.DslParseRecord;
 import net.certiv.dsl.core.parser.DslSourceParser;
+import net.certiv.dsl.core.parser.Origin;
 import net.certiv.st.dt.core.STCore;
 import net.certiv.st.dt.core.parser.gen.STGLexer;
 import net.certiv.st.dt.core.parser.gen.STGParser;
@@ -35,23 +37,25 @@ public class STSourceParser extends DslSourceParser {
 
 	@Override
 	public Throwable parse() {
+		DslErrorListener auditor = getErrorListener();
 		try {
-			record.cs = CharStreams.fromString(getContent(), record.unit.getFile().getName());
-			STGLexer lexer = new STGLexer(record.cs);
+			record.setCharStream(CharStreams.fromString(getContent(), record.unit.getFile().getName()));
+			STGLexer lexer = new STGLexer(record.getCharStream());
 			lexer.setTokenFactory(TokenFactory);
 			lexer.removeErrorListeners();
-			lexer.addErrorListener(getErrorListener());
+			lexer.addErrorListener(auditor);
+			record.setTokenStream(new CommonTokenStream(lexer));
 
-			record.ts = new CommonTokenStream(lexer);
-			record.parser = new STGParser(record.ts);
-			record.parser.setTokenFactory(TokenFactory);
-			record.parser.removeErrorListeners();
-			record.parser.addErrorListener(getErrorListener());
-			record.tree = ((STGParser) record.parser).group();
+			STGParser parser = new STGParser(record.getTokenStream());
+			parser.setTokenFactory(TokenFactory);
+			parser.removeErrorListeners();
+			parser.addErrorListener(auditor);
+			record.setParser(parser);
+			record.setTree(parser.group());
 			return null;
 
 		} catch (Exception | Error e) {
-			getErrorListener().generalError(ERR_ANALYSIS, e);
+			auditor.generalError(Origin.GENERAL, ERR_ANALYSIS, e);
 			return e;
 		}
 	}
@@ -59,7 +63,7 @@ public class STSourceParser extends DslSourceParser {
 	@Override
 	public Throwable analyze(ModelBuilder builder) {
 		try {
-			StructureVisitor visitor = new StructureVisitor(record.tree);
+			StructureVisitor visitor = new StructureVisitor(record.getTree());
 			visitor.setSourceName(record.unit.getPackageName());
 			visitor.setBuilder(builder);
 			builder.beginAnalysis();
@@ -68,7 +72,7 @@ public class STSourceParser extends DslSourceParser {
 			return null;
 
 		} catch (Exception | Error e) {
-			getErrorListener().generalError(ERR_ANALYSIS, e);
+			getErrorListener().generalError(Origin.ANALYSIS, ERR_ANALYSIS, e);
 			return e;
 		}
 	}

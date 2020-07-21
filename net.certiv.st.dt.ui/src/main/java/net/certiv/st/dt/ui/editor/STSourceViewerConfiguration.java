@@ -19,7 +19,7 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Image;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.color.IColorManager;
+import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.IPrefsManager;
 import net.certiv.dsl.core.util.Strings;
 import net.certiv.dsl.core.util.eclipse.TabStyle;
@@ -29,6 +29,7 @@ import net.certiv.dsl.ui.editor.DoubleClickStrategy;
 import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslSourceViewerConfiguration;
 import net.certiv.dsl.ui.editor.reconcile.PresentationReconciler;
+import net.certiv.dsl.ui.editor.semantic.StylesManager;
 import net.certiv.dsl.ui.editor.text.completion.CompletionCategory;
 import net.certiv.dsl.ui.editor.text.completion.CompletionProcessor;
 import net.certiv.dsl.ui.editor.text.completion.engines.ICompletionEngine;
@@ -52,9 +53,9 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	private ScannerMLComment commentMLScanner;
 	private ScannerJDComment commentJDScanner;
 
-	public STSourceViewerConfiguration(IColorManager colorMgr, IPrefsManager store, DslEditor editor,
+	public STSourceViewerConfiguration(DslColorRegistry reg, IPrefsManager store, DslEditor editor,
 			String partitioning) {
-		super(STCore.getDefault(), colorMgr, store, editor, partitioning);
+		super(STCore.getDefault(), reg, store, editor, partitioning);
 	}
 
 	@Override
@@ -92,8 +93,8 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	/**
 	 * Loads content formatters into the SourceViewer for execution on receipt of a
 	 * ISourceViewer.FORMAT command. Where nothing is selected in the document,
-	 * <b>should</b> execute the master strategy for the default partition and then
-	 * the slave strategies for the non-default partitions.
+	 * <b>should</b> execute the master strategy for the default partition and then the
+	 * slave strategies for the non-default partitions.
 	 *
 	 * @param sourceViewer the viewer that will contain the content to format
 	 * @return the content formatter
@@ -129,10 +130,12 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	@Override
 	protected void initializeScanners() {
 		IPrefsManager store = getPrefStore();
-		keywordScanner = new ScannerKeyword(store);
-		commentSLScanner = new ScannerCommentSL(store);
-		commentMLScanner = new ScannerMLComment(store);
-		commentJDScanner = new ScannerJDComment(store);
+		StylesManager mgr = getDslUI().getStylesManager();
+
+		keywordScanner = new ScannerKeyword(store, mgr);
+		commentSLScanner = new ScannerCommentSL(store, mgr);
+		commentMLScanner = new ScannerMLComment(store, mgr);
+		commentJDScanner = new ScannerJDComment(store, mgr);
 	}
 
 	@Override
@@ -147,14 +150,14 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Adapts the behavior of the contained components to the change encoded in the
-	 * given event.
+	 * Adapts the behavior of the contained components to the change encoded in the given
+	 * event.
 	 * <p>
-	 * Clients are not allowed to call this method if the old setup with text tools
-	 * is in use.
+	 * Clients are not allowed to call this method if the old setup with text tools is in
+	 * use.
 	 *
 	 * @param event the event to which to adapt
-	 * @see PythonSourceViewerConfiguration#ScriptSourceViewerConfiguration(IColorManager,
+	 * @see PythonSourceViewerConfiguration#ScriptSourceViewerConfiguration(DslColorRegistry,
 	 *          IPreferenceStore, DslEditor, String)
 	 */
 	@Override
@@ -166,8 +169,8 @@ public class STSourceViewerConfiguration extends DslSourceViewerConfiguration {
 	}
 
 	/**
-	 * Determines whether the preference change encoded by the given event changes
-	 * the behavior of one of its contained components.
+	 * Determines whether the preference change encoded by the given event changes the
+	 * behavior of one of its contained components.
 	 *
 	 * @param event the event to be investigated
 	 * @return {@code true} if event causes a behavioral change

@@ -7,7 +7,7 @@ options {
 
 @header {
 	package net.certiv.st.dt.core.parser.gen;
-	import net.certiv.st.dt.core.parser.StructureBuilder;
+	import net.certiv.st.dt.core.model.StructureBuilder;
 }
 
 structure

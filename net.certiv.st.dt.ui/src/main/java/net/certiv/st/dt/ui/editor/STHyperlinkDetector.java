@@ -15,4 +15,8 @@ public class STHyperlinkDetector extends DslHyperlinkDetector {
 		return STCore.getDefault().getDslModel();
 	}
 
+	@Override
+	protected boolean isDslLikeFilename(String name) {
+		return STCore.getDefault().getLangManager().isDslLikeFilename(name);
+	}
 }

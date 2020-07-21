@@ -9,30 +9,31 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import net.certiv.dsl.core.preferences.IPrefsManager;
-import net.certiv.dsl.ui.editor.scanners.AbstractBufferedRuleBasedScanner;
-import net.certiv.st.dt.core.preferences.Prefs;
+import net.certiv.dsl.core.preferences.consts.Editor;
+import net.certiv.dsl.ui.editor.scanners.DslRuleBasedScanner;
+import net.certiv.dsl.ui.editor.semantic.StylesManager;
 
-public class ScannerCommentSL extends AbstractBufferedRuleBasedScanner {
+public class ScannerCommentSL extends DslRuleBasedScanner {
 
 	private String[] fgTokenProperties;
 
-	public ScannerCommentSL(IPrefsManager store) {
-		super(store);
+	public ScannerCommentSL(IPrefsManager store, StylesManager stylesMgr) {
+		super(store, stylesMgr);
 		initialize();
 	}
 
 	@Override
 	protected String[] getTokenProperties() {
 		if (fgTokenProperties == null) {
-			fgTokenProperties = new String[] { bind(Prefs.EDITOR_COMMENT_LN_COLOR) };
+			fgTokenProperties = new String[] { bind(Editor.EDITOR_COMMENT_LN_COLOR) };
 		}
 		return fgTokenProperties;
 	}
 
 	@Override
 	protected List<IRule> createRules() {
-		List<IRule> rules = new ArrayList<IRule>();
-		IToken token = getToken(bind(Prefs.EDITOR_COMMENT_LN_COLOR));
+		List<IRule> rules = new ArrayList<>();
+		IToken token = getToken(bind(Editor.EDITOR_COMMENT_LN_COLOR));
 		setDefaultReturnToken(token);
 
 		rules.add(new EndOfLineRule("//", token, '\\'));

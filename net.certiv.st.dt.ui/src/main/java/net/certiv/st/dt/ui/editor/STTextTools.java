@@ -4,7 +4,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
-import net.certiv.dsl.core.color.IColorManager;
+import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.IPrefsManager;
 import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslSourceViewerConfiguration;
@@ -62,8 +62,8 @@ public class STTextTools extends DslTextTools {
 		return new STSimpleSourceViewerConfiguration(store, null, partitioning);
 	}
 
-	private IColorManager getColorManager() {
-		return STCore.getDefault().getColorManager();
+	private DslColorRegistry getColorManager() {
+		return STCore.getDefault().getColorRegistry();
 	}
 
 	@Override

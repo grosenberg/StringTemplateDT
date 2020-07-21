@@ -36,7 +36,7 @@ lexer grammar STGLexer ;
 
 DOC_COMMENT	  : DocComment	   -> channel(HIDDEN) ;
 BLOCK_COMMENT : BlockComment   -> channel(HIDDEN) ;
-LINE_COMMENT  : LineCommentExt -> channel(HIDDEN) ;
+LINE_COMMENT  : LineComment	   -> channel(HIDDEN) ;
 
 TMPL_COMMENT : LBang .? RBang -> channel(HIDDEN) ;
 
@@ -70,15 +70,17 @@ FALSE  : False	;
 
 GROUP	   : 'group'	  ;
 DELIMITERS : 'delimiters' ;
-IMPORT	   : 'import'
-						  ;
+IMPORT	   : 'import'	  ;
 
 // -----------------------------------
 // Identifiers
 
 ID : NameStartChar NameChar* ;
 
-// ===================================
+
+
+
+// ===========================================================
 // Lexer fragments
 
 // -----------------------------------
@@ -91,8 +93,7 @@ fragment RBang	 : '!>'	  ;
 fragment LPct	 : '<%'	  ;
 fragment RPct	 : '%>'	  ;
 fragment LDAngle : LShift ;
-fragment RDAngle : RShift
-						  ;
+fragment RDAngle : RShift ;
 
 // -----------------------------------
 
@@ -101,8 +102,7 @@ fragment Hws : [ \t]	;
 fragment Vws : [\r\n\f] ;
 fragment DocComment		: '/**' .*?		('*/' | EOF	) ;
 fragment BlockComment	: '/*'  .*?		('*/' | EOF	) ;
-fragment LineComment	: '//' ~[\r\n]*				  ;
-fragment LineCommentExt	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )* ;
+fragment LineComment	: '//' ~[\r\n]* ( '\r'? '\n' Hws* '//' ~[\r\n]* )* ;
 
 // -----------------------------------
 
@@ -161,7 +161,7 @@ fragment NameChar
 // Types
 
 fragment True  : 'true' ;
-fragment False : 'false';
+fragment False : 'false'; 
 
 // -----------------------------------
 

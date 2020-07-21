@@ -9,12 +9,13 @@ import org.eclipse.jface.text.rules.WhitespaceRule;
 
 import net.certiv.dsl.core.preferences.IPrefsManager;
 import net.certiv.dsl.core.preferences.consts.Editor;
-import net.certiv.dsl.ui.editor.scanners.AbstractBufferedRuleBasedScanner;
+import net.certiv.dsl.ui.editor.scanners.DslRuleBasedScanner;
+import net.certiv.dsl.ui.editor.semantic.StylesManager;
 import net.certiv.dsl.ui.editor.text.rules.CharSequenceRule;
 import net.certiv.dsl.ui.editor.text.rules.CharsRule;
 import net.certiv.dsl.ui.editor.text.rules.DslWordRule;
 
-public class ScannerKeyword extends AbstractBufferedRuleBasedScanner {
+public class ScannerKeyword extends DslRuleBasedScanner {
 
 	public static final String[] KEYWORDS = { "delimiters", "import", "key", "default", "first", "last", "rest",
 			"trunc", "strip", "trim", "length", "strlen", "reverse", "@super", "@end", "if", "else", "endif", "elseif",
@@ -28,8 +29,8 @@ public class ScannerKeyword extends AbstractBufferedRuleBasedScanner {
 
 	private String[] tokenProperties;
 
-	public ScannerKeyword(IPrefsManager store) {
-		super(store);
+	public ScannerKeyword(IPrefsManager store, StylesManager stylesMgr) {
+		super(store, stylesMgr);
 		initialize();
 	}
 

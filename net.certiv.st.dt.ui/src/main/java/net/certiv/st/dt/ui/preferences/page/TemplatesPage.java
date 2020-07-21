@@ -3,7 +3,7 @@ package net.certiv.st.dt.ui.preferences.page;
 import org.eclipse.jface.text.IDocument;
 
 import net.certiv.dsl.core.DslCore;
-import net.certiv.dsl.core.color.IColorManager;
+import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.IPrefsManager;
 import net.certiv.dsl.core.preferences.PrefsManager;
 import net.certiv.dsl.ui.DslUI;
@@ -45,8 +45,8 @@ public class TemplatesPage extends DslTemplatePreferencePage {
 		return STCore.getDefault();
 	}
 
-	private IColorManager getColorManager() {
-		return STCore.getDefault().getColorManager();
+	private DslColorRegistry getColorManager() {
+		return STCore.getDefault().getColorRegistry();
 	}
 
 	private DslTextTools getTextTools() {

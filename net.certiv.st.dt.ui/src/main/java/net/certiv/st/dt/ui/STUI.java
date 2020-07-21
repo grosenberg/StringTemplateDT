@@ -10,6 +10,7 @@ import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
 import net.certiv.dsl.ui.templates.CompletionManager;
 import net.certiv.st.dt.core.STCore;
+import net.certiv.st.dt.ui.editor.STCompletionManager;
 import net.certiv.st.dt.ui.editor.STEditor;
 import net.certiv.st.dt.ui.editor.STTextTools;
 

@@ -24,7 +24,7 @@ public class STCore extends DslCore {
 
 	@Override
 	public DslCore getDslCore() {
-		return STCore.getDefault();
+		return this;
 	}
 
 	@Override

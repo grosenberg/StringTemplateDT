@@ -10,10 +10,9 @@ import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import net.certiv.dsl.core.color.DslColorManager;
-import net.certiv.dsl.core.color.IColorManager;
-import net.certiv.dsl.core.preferences.PrefsDeltaManager;
+import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.IPrefsManager;
+import net.certiv.dsl.core.preferences.PrefsDeltaManager;
 import net.certiv.dsl.core.preferences.consts.Editor;
 import net.certiv.dsl.ui.editor.DslEditor;
 import net.certiv.dsl.ui.editor.DslSourceViewer;
@@ -28,8 +27,8 @@ public class SyntaxColorConfigBlock extends AbstractSyntaxColorConfigBlock {
 	private static final String PREVIEW_FILE_NAME = "ColorPreview.g4";  // $NON-NLS-1$
 
 	public SyntaxColorConfigBlock(SyntaxColorPage page, PrefsDeltaManager delta, FormToolkit formkit,
-			DslColorManager colorMgr) {
-		super(page, delta, formkit, colorMgr);
+			DslColorRegistry reg) {
+		super(page, delta, formkit, reg);
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class SyntaxColorConfigBlock extends AbstractSyntaxColorConfigBlock {
 	}
 
 	@Override
-	protected DslSourceViewerConfiguration createSimpleSourceViewerConfiguration(IColorManager colorMgr,
+	protected DslSourceViewerConfiguration createSimpleSourceViewerConfiguration(DslColorRegistry colorMgr,
 			IPrefsManager store, DslEditor editor, boolean configFormatter) {
 		return new STSimpleSourceViewerConfiguration(colorMgr, store, editor, Partitions.PARTITIONING, configFormatter);
 	}

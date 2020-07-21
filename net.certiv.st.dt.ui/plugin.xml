@@ -284,7 +284,7 @@
            translations="src/main/resources/templates/templates.properties">
      </include>
      <contextType
-           class="net.certiv.st.dt.ui.templates.STTemplateContextType"
+           class="net.certiv.st.dt.ui.templates.STContextType"
            id="net.certiv.st.dt.ui.DefaultContext"
            name="Template">
      </contextType>
