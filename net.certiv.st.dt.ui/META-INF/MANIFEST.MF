@@ -3,17 +3,17 @@ Automatic-Module-Name: net.certiv.st.dt.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: ST UI
 Bundle-SymbolicName: net.certiv.st.dt.ui;singleton:=true
-Bundle-Version: 4.11.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-ClassPath: .
 Eclipse-RegisterBuddy: net.certiv.dsl.lib
 Bundle-Activator: net.certiv.st.dt.ui.STUI
 Bundle-Vendor: Certiv Analytics
 Bundle-Localization: plugin
-Require-Bundle: net.certiv.dsl.jdt.plugin;bundle-version="0.11.0",
- net.certiv.st.dt.core;bundle-version="4.1.0",
- net.certiv.dsl.core;bundle-version="0.11.0",
- net.certiv.dsl.ui;bundle-version="0.11.0",
- net.certiv.dsl.lib;bundle-version="0.11.0",
+Require-Bundle: net.certiv.dsl.jdt.plugin;bundle-version="0.2.0",
+ net.certiv.st.dt.core;bundle-version="4.2.0",
+ net.certiv.dsl.core;bundle-version="0.2.0",
+ net.certiv.dsl.ui;bundle-version="0.2.0",
+ net.certiv.dsl.lib;bundle-version="0.2.0",
  org.eclipse.core.resources;bundle-version="3.9.1",
  org.eclipse.core.runtime;bundle-version="3.10.0",
  org.eclipse.jface.text;bundle-version="3.9.1",
@@ -22,6 +22,6 @@ Require-Bundle: net.certiv.dsl.jdt.plugin;bundle-version="0.11.0",
  org.eclipse.ui.editors;bundle-version="3.8.200",
  org.eclipse.ui.ide;bundle-version="3.10.1",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.9.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.forms.widgets

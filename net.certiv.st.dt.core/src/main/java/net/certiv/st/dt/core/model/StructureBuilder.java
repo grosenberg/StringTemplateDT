@@ -82,7 +82,7 @@ public abstract class StructureBuilder extends Processor {
 	public void createImportStatement() {
 		ImportSpecContext ctx = (ImportSpecContext) lastPathNode();
 		Specialization data = new Specialization(SpecializedType.Imports, ruleName(ctx), ctx, ctx.STRING().getText());
-		builder.importStmt(ctx, ctx, data);
+		builder.include(ctx, ctx, data);
 	}
 
 	public void createDictStatement() {

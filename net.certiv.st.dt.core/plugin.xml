@@ -30,17 +30,4 @@
       </initializer>
    </extension>
 
-   <!--
-   <extension
-         point="net.certiv.dsl.core.modelBuilderFactory">
-      <modelBuilderFactory
-            class="net.certiv.st.dt.core.parser.STSourceParserFactory"
-            description="ST Model Builder Factory"
-            name="ST Model Builder Factory"
-            natureId="net.certiv.st.dt.core.nature"
-            priority="0">
-      </modelBuilderFactory>
-   </extension>
-   -->
-
 </plugin>

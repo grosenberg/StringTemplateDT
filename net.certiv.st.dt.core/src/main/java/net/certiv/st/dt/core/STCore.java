@@ -10,12 +10,13 @@
  *******************************************************************************/
 package net.certiv.st.dt.core;
 
+import org.apache.logging.log4j.Level;
+
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.lang.LanguageManager;
 import net.certiv.dsl.core.log.Log;
-import net.certiv.dsl.core.log.Log.LogLevel;
 
 public class STCore extends DslCore {
 
@@ -25,7 +26,7 @@ public class STCore extends DslCore {
 
 	public STCore() {
 		super();
-		Log.defLevel(LogLevel.Info);
+		Log.defLevel(Level.INFO);
 	}
 
 	public static STCore getDefault() {

@@ -10,11 +10,12 @@
  *******************************************************************************/
 package net.certiv.st.dt.ui;
 
+import org.apache.logging.log4j.Level;
+
 import org.osgi.framework.BundleContext;
 
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.log.Log;
-import net.certiv.dsl.core.log.Log.LogLevel;
 import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;
 import net.certiv.dsl.ui.editor.text.DslTextTools;
@@ -33,7 +34,7 @@ public class STUI extends DslUI {
 
 	public STUI() {
 		super();
-		Log.defLevel(LogLevel.Debug);
+		Log.defLevel(Level.DEBUG);
 	}
 
 	public static STUI getDefault() {
