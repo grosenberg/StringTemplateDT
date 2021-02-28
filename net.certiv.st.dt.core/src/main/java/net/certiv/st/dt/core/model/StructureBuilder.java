@@ -12,14 +12,14 @@ package net.certiv.st.dt.core.model;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
 import net.certiv.antlr.runtime.xvisitor.Processor;
+import net.certiv.common.util.Strings;
 import net.certiv.dsl.core.model.ModelType;
 import net.certiv.dsl.core.model.builder.ModelBuilder;
-import net.certiv.dsl.core.util.Strings;
+import net.certiv.dsl.core.util.TextUtil;
 import net.certiv.st.dt.core.parser.gen.STGParser;
 import net.certiv.st.dt.core.parser.gen.STGParser.DelimitersContext;
 import net.certiv.st.dt.core.parser.gen.STGParser.DictContext;
@@ -63,7 +63,8 @@ public abstract class StructureBuilder extends Processor {
 		TemplateContext ctx = (TemplateContext) lastPathNode();
 		Specialization data;
 		if (ctx.AT() != null) {
-			data = new Specialization(SpecializedType.Region, ruleName(ctx), ctx, Strings.join(Strings.DOT, ctx.ID()));
+			data = new Specialization(SpecializedType.Region, ruleName(ctx), ctx,
+					TextUtil.join(Strings.DOT, ctx.ID()));
 		} else {
 			data = new Specialization(SpecializedType.Template, ruleName(ctx), ctx, ctx.name.getText());
 		}
@@ -81,13 +82,15 @@ public abstract class StructureBuilder extends Processor {
 
 	public void createImportStatement() {
 		ImportSpecContext ctx = (ImportSpecContext) lastPathNode();
-		Specialization data = new Specialization(SpecializedType.Imports, ruleName(ctx), ctx, ctx.STRING().getText());
+		Specialization data = new Specialization(SpecializedType.Imports, ruleName(ctx), ctx,
+				ctx.STRING().getText());
 		builder.include(ctx, ctx, data);
 	}
 
 	public void createDictStatement() {
 		DictContext ctx = (DictContext) lastPathNode();
-		Specialization data = new Specialization(SpecializedType.Dict, ruleName(ctx), ctx, ctx.ID().getText());
+		Specialization data = new Specialization(SpecializedType.Dict, ruleName(ctx), ctx,
+				ctx.ID().getText());
 		builder.statement(ModelType.EXPRESSION, ctx, ctx.ID(), data);
 	}
 

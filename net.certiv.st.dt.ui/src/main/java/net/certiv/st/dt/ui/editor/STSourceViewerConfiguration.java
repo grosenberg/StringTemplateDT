@@ -28,10 +28,10 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Image;
 
+import net.certiv.common.util.Strings;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.color.DslColorRegistry;
 import net.certiv.dsl.core.preferences.IPrefsManager;
-import net.certiv.dsl.core.util.Strings;
 import net.certiv.dsl.core.util.eclipse.TabStyle;
 import net.certiv.dsl.ui.DslImageManager;
 import net.certiv.dsl.ui.DslUI;

@@ -16,12 +16,12 @@ import java.util.List;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
+import net.certiv.common.util.Chars;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.lang.LanguageManager;
 import net.certiv.dsl.core.lang.RootEntry;
 import net.certiv.dsl.core.model.ICodeUnit;
 import net.certiv.dsl.core.parser.DslSourceParser;
-import net.certiv.dsl.core.util.Chars;
 import net.certiv.st.dt.core.parser.STSourceParser;
 
 public class STLangManager extends LanguageManager {

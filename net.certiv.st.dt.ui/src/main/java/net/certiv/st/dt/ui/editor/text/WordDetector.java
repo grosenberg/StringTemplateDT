@@ -10,7 +10,7 @@
  *******************************************************************************/
 package net.certiv.st.dt.ui.editor.text;
 
-import net.certiv.dsl.core.util.Chars;
+import net.certiv.common.util.Chars;
 import net.certiv.dsl.ui.editor.text.rules.IWordDetector2;
 
 public class WordDetector implements IWordDetector2 {

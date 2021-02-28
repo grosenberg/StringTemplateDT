@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import net.certiv.dsl.core.log.Log;
+import net.certiv.common.log.Log;
 import net.certiv.st.dt.core.STCore;
 
 /**

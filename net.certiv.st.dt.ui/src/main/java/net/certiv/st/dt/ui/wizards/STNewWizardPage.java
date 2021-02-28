@@ -13,7 +13,7 @@ package net.certiv.st.dt.ui.wizards;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 
-import net.certiv.dsl.core.util.Strings;
+import net.certiv.common.util.Strings;
 import net.certiv.dsl.ui.wizard.DslFileWizard;
 import net.certiv.dsl.ui.wizard.DslFileWizardPage;
 
