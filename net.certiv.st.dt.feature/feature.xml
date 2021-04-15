@@ -2,7 +2,7 @@
 <feature
       id="net.certiv.st.dt.feature"
       label="StringTemplateDT"
-      version="4.2.0.qualifier"
+      version="4.2.1.qualifier"
       provider-name="Certiv Analytics">
 
    <description>
@@ -232,6 +232,10 @@ litigation.
    <url>
       <update label="Certiv Tools" url="http://www.certiv.net/updates"/>
    </url>
+
+   <includes
+         id="net.certiv.dsl.feature"
+         version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.core.resources" version="3.9.1" match="greaterOrEqual"/>
