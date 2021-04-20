@@ -25,7 +25,7 @@ public class STCore extends DslCore {
 
 	public STCore() {
 		super();
-		Log.defLevel(Level.INFO);
+		Log.defLevel(Level.DEBUG);
 	}
 
 	public static STCore getDefault() {
