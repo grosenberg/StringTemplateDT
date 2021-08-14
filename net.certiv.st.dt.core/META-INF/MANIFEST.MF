@@ -3,7 +3,7 @@ Automatic-Module-Name: net.certiv.st.dt.core
 Bundle-ManifestVersion: 2
 Bundle-Name: ST Core
 Bundle-SymbolicName: net.certiv.st.dt.core;singleton:=true
-Bundle-Version: 4.2.1.qualifier
+Bundle-Version: 4.2.2.qualifier
 Bundle-ClassPath: .
 Eclipse-RegisterBuddy: net.certiv.dsl.lib
 Bundle-Activator: net.certiv.st.dt.core.STCore

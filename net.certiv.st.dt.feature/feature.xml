@@ -2,7 +2,7 @@
 <feature
       id="net.certiv.st.dt.feature"
       label="StringTemplateDT"
-      version="4.2.1.qualifier"
+      version="4.2.2.qualifier"
       provider-name="Certiv Analytics">
 
    <description>
