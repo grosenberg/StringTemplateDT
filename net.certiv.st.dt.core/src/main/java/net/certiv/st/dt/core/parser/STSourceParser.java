@@ -12,8 +12,8 @@ package net.certiv.st.dt.core.parser;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.apache.logging.log4j.Level;
 
+import net.certiv.common.log.Level;
 import net.certiv.common.log.Log;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.model.builder.ModelBuilder;
@@ -32,7 +32,7 @@ public class STSourceParser extends DslSourceParser {
 
 	public STSourceParser(DslParseRecord record) {
 		super(record);
-		Log.setLevel(this, Level.INFO);
+		Log.setLevel(Level.INFO);
 	}
 
 	@Override

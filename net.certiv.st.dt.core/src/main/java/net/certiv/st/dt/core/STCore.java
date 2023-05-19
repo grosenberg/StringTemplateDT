@@ -10,9 +10,9 @@
  *******************************************************************************/
 package net.certiv.st.dt.core;
 
-import org.apache.logging.log4j.Level;
 import org.osgi.framework.BundleContext;
 
+import net.certiv.common.log.Level;
 import net.certiv.common.log.Log;
 import net.certiv.dsl.core.DslCore;
 import net.certiv.dsl.core.lang.LanguageManager;
@@ -25,7 +25,6 @@ public class STCore extends DslCore {
 
 	public STCore() {
 		super();
-		Log.defLevel(Level.DEBUG);
 	}
 
 	public static STCore getDefault() {
@@ -41,6 +40,7 @@ public class STCore extends DslCore {
 	public void start(BundleContext context) throws Exception {
 		plugin = this;
 		super.start(context);
+		Log.defLevel(Level.DEBUG);
 	}
 
 	@Override
