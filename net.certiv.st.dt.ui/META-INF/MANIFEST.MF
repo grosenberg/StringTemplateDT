@@ -11,9 +11,9 @@ Bundle-Vendor: Certiv Analytics
 Bundle-Localization: plugin
 Require-Bundle: net.certiv.st.dt.core;bundle-version="4.3.0",
  net.certiv.dsl.jdt.plugin;bundle-version="0.30.0",
- net.certiv.dsl.core;bundle-version="0.32.0",
- net.certiv.dsl.ui;bundle-version="0.32.0",
- net.certiv.dsl.lib;bundle-version="0.32.0",
+ net.certiv.dsl.core;bundle-version="0.34.0",
+ net.certiv.dsl.ui;bundle-version="0.34.0",
+ net.certiv.dsl.lib;bundle-version="0.34.0",
  org.eclipse.core.resources;bundle-version="3.9.1",
  org.eclipse.core.runtime;bundle-version="3.10.0",
  org.eclipse.jface.text;bundle-version="3.9.1",
